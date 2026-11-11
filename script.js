@@ -13,7 +13,33 @@ const channels = [
   ["telegram", "Написать в Telegram"],
   ["whatsapp", "Написать в WhatsApp"],
   ["max", "Написать в MAX"],
+  ["kwork", "Заказать на Kwork"],
 ];
+
+/* Отзывы: блок появляется, только когда в config.js есть записи */
+const reviews = Array.isArray(studio.reviews) ? studio.reviews.filter((r) => r && String(r.text || "").trim()) : [];
+const reviewsSection = document.getElementById("reviews");
+const quotes = document.getElementById("quotes");
+if (reviews.length && reviewsSection && quotes) {
+  reviews.forEach((r) => {
+    const fig = document.createElement("figure");
+    fig.className = "quote";
+    const text = document.createElement("blockquote");
+    text.textContent = String(r.text).trim();
+    const cap = document.createElement("figcaption");
+    const who = document.createElement("strong");
+    who.textContent = String(r.name || "").trim();
+    cap.appendChild(who);
+    if (String(r.event || "").trim()) {
+      const ev = document.createElement("span");
+      ev.textContent = String(r.event).trim();
+      cap.appendChild(ev);
+    }
+    fig.append(text, cap);
+    quotes.appendChild(fig);
+  });
+  reviewsSection.hidden = false;
+}
 const box = document.getElementById("contact-btns");
 const empty = document.getElementById("contact-empty");
 let shown = 0;

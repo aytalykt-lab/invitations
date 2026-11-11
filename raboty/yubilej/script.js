@@ -412,13 +412,14 @@ function bindMusic() {
   const src = String(cfg.audio || "").trim();
   if (!src) return;
 
+  // Мелодия начинает скачиваться только после первого нажатия гостя: страница открывается быстрее.
+  music.preload = "none";
   music.src = src;
-  music.load();
   let ready = false;
+  if (musicHint) musicHint.hidden = false;
 
   music.addEventListener("canplaythrough", () => {
     ready = true;
-    if (musicHint) musicHint.hidden = false;
   });
   music.addEventListener("error", () => {
     ready = false;
