@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Алина и Тимур — премьера 10 июля 2027</title>
+    <meta name="description" content="Приглашение на свадьбу Алины и Тимура. Демо-работа: имена, дата и место вымышлены." />
+    <meta name="theme-color" content="#3a0912" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Prata&family=Tenor+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=7" />
+  </head>
+  <body class="is-locked">
+    <!-- Вход: занавес -->
+    <div class="curtain" id="curtain">
+      <div class="drape drape-left" aria-hidden="true"></div>
+      <div class="drape drape-right" aria-hidden="true"></div>
+      <div class="valance" aria-hidden="true"></div>
+      <div class="curtain-copy">
+        <p class="curtain-kicker">Вы приглашены</p>
+        <p class="curtain-title">на премьеру</p>
+        <button type="button" class="medal" id="open">
+          <span class="medal-mono">А<i>&amp;</i>Т</span>
+          <span class="medal-text">Поднять занавес</span>
+        </button>
+        <p class="curtain-hint">Нажмите — зазвучит музыка</p>
+      </div>
+    </div>
+
+    <main class="stage" id="stage">
+      <!-- Афиша -->
+      <header class="poster">
+        <div class="spot" aria-hidden="true"></div>
+        <p class="poster-top">Премьера сезона</p>
+        <div class="bulbs">
+          <img src="photos/afisha.jpg" alt="Алина и Тимур" />
+        </div>
+        <h1 class="names">
+          <span>Алина</span>
+          <i>и</i>
+          <span>Тимур</span>
+        </h1>
+        <p class="poster-sub">Свадьба в двух действиях с&nbsp;банкетом</p>
+        <p class="poster-date"><span>10</span> июля 2027 · суббота · Якутск</p>
+        <p class="scroll-cue" aria-hidden="true">листайте программку</p>
+      </header>
+
+      <!-- Либретто -->
+      <section class="page reveal">
+        <svg class="tassel tassel-l" viewBox="0 0 40 150" aria-hidden="true"><path d="M20 0v78" /><circle cx="20" cy="84" r="6" /><path class="fill" d="M11 92h18l4 46H7z" /><path d="M11 92h18l4 46H7z M14 96v40 M20 96v42 M26 96v40 M9 100h22" /></svg>
+        <svg class="tassel tassel-r" viewBox="0 0 40 150" aria-hidden="true"><path d="M20 0v78" /><circle cx="20" cy="84" r="6" /><path class="fill" d="M11 92h18l4 46H7z" /><path d="M11 92h18l4 46H7z M14 96v40 M20 96v42 M26 96v40 M9 100h22" /></svg>
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M7 11h18v11a9 9 0 0 1-18 0z M12 17h3 M18 17h3 M12 24c2 2.5 6 2.5 8 0" /><path pathLength="1" d="M28 20h13v10a8.5 8.5 0 0 1-15 5.5 M31 26h3 M37 26h2 M31 35c2-2.5 5-2.5 7 0" /></svg>
+        <p class="label">Либретто</p>
+        <h2>Дорогие зрители!</h2>
+        <p class="lead">
+          Эту историю мы писали вдвоём несколько лет, и&nbsp;теперь в&nbsp;ней главная сцена.
+          Без вас зал будет пустым — приходите, ваши места в&nbsp;первом ряду.
+        </p>
+        <div class="rule" aria-hidden="true"><span></span></div>
+      </section>
+
+      <section class="photo-wide reveal">
+        <img src="photos/duet.jpg" alt="Алина и Тимур в поле" loading="lazy" />
+        <p class="caption">В главных ролях — жених и невеста</p>
+      </section>
+
+      <!-- Дата -->
+      <section class="page reveal">
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 7v4 M11 34c2.5-3 3.5-6 3.5-12a9.5 9.5 0 0 1 19 0c0 6 1 9 3.5 12z" /><path pathLength="1" d="M20 38a4 4 0 0 0 8 0" /></svg>
+        <p class="label">Дата премьеры</p>
+        <h2>Июль 2027</h2>
+        <div class="cal" id="cal" role="img" aria-label="Календарь: июль 2027, свадьба в субботу 10-го"></div>
+        <p class="bell">До третьего звонка</p>
+        <div class="countdown" id="countdown" aria-live="off"></div>
+      </section>
+
+      <!-- Программа -->
+      <section class="page page-dark reveal">
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M13 8h22v32H13z M18 16h12 M18 22h12 M18 28h8 M18 34h10" /></svg>
+        <p class="label">Программа вечера</p>
+        <h2>Действия и антракты</h2>
+        <ol class="acts">
+          <li>
+            <span class="act-no">I</span>
+            <div>
+              <time>16:00</time>
+              <strong>Фойе</strong>
+              <p>Сбор гостей, фуршет и живая музыка</p>
+            </div>
+          </li>
+          <li>
+            <span class="act-no">II</span>
+            <div>
+              <time>17:00</time>
+              <strong>Церемония</strong>
+              <p>Главная сцена вечера: клятвы и кольца</p>
+            </div>
+          </li>
+          <li>
+            <span class="act-no">III</span>
+            <div>
+              <time>18:00</time>
+              <strong>Банкет</strong>
+              <p>Первое застолье и первые тосты</p>
+            </div>
+          </li>
+          <li>
+            <span class="act-no">IV</span>
+            <div>
+              <time>20:30</time>
+              <strong>Первый танец</strong>
+              <p>Вальс молодожёнов, после него танцуют все</p>
+            </div>
+          </li>
+          <li>
+            <span class="act-no">V</span>
+            <div>
+              <time>22:00</time>
+              <strong>Торт</strong>
+              <p>Сладкий финал и общий снимок</p>
+            </div>
+          </li>
+          <li>
+            <span class="act-no">VI</span>
+            <div>
+              <time>23:00</time>
+              <strong>Поклон</strong>
+              <p>Круг пожеланий и проводы</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Сцена -->
+      <section class="page reveal">
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M5 18L24 6l19 12z M10 18v18 M18 18v18 M30 18v18 M38 18v18 M6 36h36 M3 41h42" /></svg>
+        <p class="label">Сцена</p>
+        <h2>Зал «Премьера»</h2>
+        <figure class="venue"><img src="photos/scena.jpg" alt="Зал со сценой и люстрами" loading="lazy" /></figure>
+        <p class="lead">Якутск, второй этаж.<br />Вход со стороны главной площади.</p>
+        <div class="map">
+          <iframe
+            title="Карта Якутска"
+            src="https://yandex.ru/map-widget/v1/?ll=129.732178%2C62.027221&z=14&l=map&scroll=false"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="note">В демо на карте показан центр города. В вашем приглашении будет точка зала и маршрут в 2ГИС.</p>
+      </section>
+
+      <section class="photo-wide reveal">
+        <img src="photos/zakat.jpg" alt="Пара на закате" loading="lazy" />
+      </section>
+
+      <!-- Костюмы -->
+      <section class="page reveal">
+        <svg class="tassel tassel-l" viewBox="0 0 40 150" aria-hidden="true"><path d="M20 0v78" /><circle cx="20" cy="84" r="6" /><path class="fill" d="M11 92h18l4 46H7z" /><path d="M11 92h18l4 46H7z M14 96v40 M20 96v42 M26 96v40 M9 100h22" /></svg>
+        <svg class="tassel tassel-r" viewBox="0 0 40 150" aria-hidden="true"><path d="M20 0v78" /><circle cx="20" cy="84" r="6" /><path class="fill" d="M11 92h18l4 46H7z" /><path d="M11 92h18l4 46H7z M14 96v40 M20 96v42 M26 96v40 M9 100h22" /></svg>
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 24L8 14v20z M24 24l16-10v20z" /><circle pathLength="1" cx="24" cy="24" r="3" /></svg>
+        <p class="label">Костюмы</p>
+        <h2>Вечерний выход</h2>
+        <p class="lead">
+          Просим поддержать палитру вечера: глубокие винные, золотистые и&nbsp;кремовые оттенки.
+          Белый оставим невесте.
+        </p>
+        <div class="swatches" aria-hidden="true">
+          <span style="--c: #5c1020"></span>
+          <span style="--c: #8a2a35"></span>
+          <span style="--c: #c9a35a"></span>
+          <span style="--c: #e6d3ae"></span>
+          <span style="--c: #2b1a16"></span>
+        </div>
+      </section>
+
+      <!-- Подарки -->
+      <section class="page reveal">
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 44V27 M16 44l8-11 8 11" /><path pathLength="1" d="M24 27c-9 0-11-9-6.5-13 3-3 6.5-1 6.5 2 0-3 3.5-5 6.5-2 4.5 4 2.5 13-6.5 13z" /><path pathLength="1" d="M24 16v6" /></svg>
+        <p class="label">Цветы и овации</p>
+        <h2>О подарках</h2>
+        <p class="lead">
+          Букеты после спектакля унести сложно, поэтому вместо цветов будем рады конверту.
+          Аплодисменты принимаем в&nbsp;любом количестве.
+        </p>
+        <div class="rule" aria-hidden="true"><span></span></div>
+      </section>
+
+      <!-- Бронь мест -->
+      <section class="page page-dark reveal" id="rsvp">
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M5 15h38v6a3.5 3.5 0 0 0 0 7v6H5v-6a3.5 3.5 0 0 0 0-7z" /><path pathLength="1" d="M31 17v3 M31 23v3 M31 29v3 M12 22h12 M12 27h8" /></svg>
+        <p class="label">Бронь мест</p>
+        <h2>Вы придёте?</h2>
+        <p class="lead">Напишите имя и фамилию — мы оставим за вами кресло.</p>
+        <label class="field">
+          <span>Имя и фамилия</span>
+          <input id="guest" type="text" autocomplete="name" placeholder="Мария Иванова" />
+        </label>
+        <div class="tickets">
+          <button type="button" class="ticket" data-answer="yes">
+            <small>билет</small>
+            Приду
+          </button>
+          <button type="button" class="ticket ticket-ghost" data-answer="no">
+            <small>возврат</small>
+            Не смогу
+          </button>
+        </div>
+        <p class="hint" id="hint" role="status" hidden></p>
+      </section>
+
+      <!-- Фото -->
+      <section class="page reveal">
+        <svg class="tassel tassel-l" viewBox="0 0 40 150" aria-hidden="true"><path d="M20 0v78" /><circle cx="20" cy="84" r="6" /><path class="fill" d="M11 92h18l4 46H7z" /><path d="M11 92h18l4 46H7z M14 96v40 M20 96v42 M26 96v40 M9 100h22" /></svg>
+        <svg class="tassel tassel-r" viewBox="0 0 40 150" aria-hidden="true"><path d="M20 0v78" /><circle cx="20" cy="84" r="6" /><path class="fill" d="M11 92h18l4 46H7z" /><path d="M11 92h18l4 46H7z M14 96v40 M20 96v42 M26 96v40 M9 100h22" /></svg>
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M7 16h8l3-4h12l3 4h8v22H7z" /><circle pathLength="1" cx="24" cy="26" r="7" /></svg>
+        <p class="label">Фотохроника</p>
+        <h2>Кадры вечера</h2>
+        <p class="lead">
+          Снимки с&nbsp;праздника собираем в&nbsp;общей группе в&nbsp;MAX. После свадьбы поделимся альбомом.
+        </p>
+        <a class="link-btn" id="max-link" href="#" hidden>Открыть группу в MAX</a>
+      </section>
+
+      <!-- Финал -->
+      <footer class="finale">
+        <img src="photos/final.jpg" alt="" loading="lazy" />
+        <div class="finale-copy">
+          <p class="label">Финал</p>
+          <p class="finale-line">Ждём вас в&nbsp;зале</p>
+          <p class="finale-names">Алина и Тимур</p>
+          <p class="finale-date">10 июля 2027 · Якутск</p>
+          <p class="credit">
+            Демо-работа · Музыка: Kevin MacLeod — «Frost Waltz» (CC BY 4.0) · Фото: Pexels
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <audio id="music" loop preload="auto" src="audio/music.mp3"></audio>
+    <button type="button" class="sound" id="sound" hidden aria-pressed="true" aria-label="Выключить музыку">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="6.5" cy="18" r="2.5" fill="currentColor" />
+        <circle cx="16.5" cy="16" r="2.5" fill="currentColor" />
+        <path class="sound-off" d="M4 4l16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+    </button>
+
+    <script src="config.js?v=1"></script>
+    <script src="script.js?v=1"></script>
+  </body>
+</html>

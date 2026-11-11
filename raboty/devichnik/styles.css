@@ -1,0 +1,1483 @@
+/* Приглашение «Игристое»: девичник. Пудровый розовый, розе, малина, шампань. */
+
+:root {
+  --blush: #fbf0ee;
+  --blush-deep: #f6dfe0;
+  --rose: #de7f98;
+  --berry: #7a1f3d;
+  --berry-deep: #4f1026;
+  --berry-lit: #a23158;
+  --champ: #c9a16a;
+  --champ-lit: #f3dfbd;
+  --ink: #3a1722;
+  --muted: #94707a;
+  --line: rgba(122, 31, 61, 0.18);
+
+  --script: "Great Vibes", "Snell Roundhand", cursive;
+  --display: "Playfair Display", "Times New Roman", serif;
+  --serif: "Cormorant Garamond", Georgia, serif;
+
+  --pad: 28px;
+  --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: #2c0915;
+}
+
+body {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: #2c0915;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.is-locked {
+  overflow: hidden;
+  height: 100dvh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+p,
+ol,
+ul,
+figure {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--berry-lit);
+  outline-offset: 4px;
+}
+
+/* ---------- Вход: бутылка игристого ---------- */
+
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 var(--pad);
+  background:
+    radial-gradient(70% 45% at 50% 58%, #fff7f3 0, rgba(255, 247, 243, 0) 70%),
+    linear-gradient(180deg, #f9e3e4, #f3cfd5);
+  transition: opacity 1.3s ease 0.9s, transform 1.6s var(--ease) 0.9s;
+}
+
+.gate[hidden] {
+  display: none;
+}
+
+.gate-kicker {
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  text-transform: uppercase;
+  color: var(--berry);
+}
+
+.gate-title {
+  margin-top: 2px;
+  font-family: var(--script);
+  font-size: clamp(74px, 23vw, 100px);
+  line-height: 1.05;
+  color: var(--berry);
+}
+
+.pop {
+  position: relative;
+  margin-top: 6px;
+  width: 150px;
+  height: min(46vh, 352px);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.bottle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 22px 22px rgba(122, 31, 61, 0.28));
+}
+
+.bottle .glass {
+  fill: #5a1630;
+  stroke: #3b0c1e;
+  stroke-width: 1.5;
+}
+
+.bottle .foil {
+  fill: #d9b57c;
+  stroke: #a9824a;
+  stroke-width: 1;
+}
+
+.bottle .foil-line {
+  fill: none;
+  stroke: #a9824a;
+  stroke-width: 1;
+}
+
+.bottle .tag {
+  fill: #fff6ee;
+  stroke: #d9b57c;
+  stroke-width: 1.5;
+}
+
+.bottle .tag-heart {
+  fill: var(--rose);
+}
+
+.bottle .shine {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+/* Пробка сидит на горлышке и покачивается, приглашая нажать */
+.cork {
+  position: absolute;
+  left: 50%;
+  top: 8.2%;
+  width: 24%;
+  margin-left: -12%;
+  z-index: 2;
+  transform-origin: 50% 100%;
+  animation: wiggle 2.4s ease-in-out infinite;
+}
+
+.cork path {
+  fill: #e7c9a0;
+  stroke: #a9824a;
+  stroke-width: 1.5;
+}
+
+.cork .cork-line {
+  fill: none;
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+@keyframes wiggle {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0);
+  }
+  70% {
+    transform: rotate(-9deg);
+  }
+  80% {
+    transform: rotate(8deg);
+  }
+  90% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  66% {
+    transform: scale(1.05);
+  }
+}
+
+.gate-hint {
+  margin-top: 16px;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--berry);
+  animation: bob 2s ease-in-out infinite alternate;
+}
+
+@keyframes bob {
+  to {
+    transform: translateY(8px);
+  }
+}
+
+/* Открытие: бутылка вздрагивает, пробка улетает, экран уходит вверх */
+.gate.is-open {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-8%);
+}
+
+.gate.is-open .pop {
+  animation: shake 0.45s ease-in-out;
+}
+
+.gate.is-open .cork {
+  animation: cork-fly 1.2s cubic-bezier(0.2, 0.6, 0.4, 1) 0.4s forwards;
+}
+
+.gate.is-open .gate-hint {
+  animation: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(-5deg);
+  }
+  40% {
+    transform: rotate(5deg);
+  }
+  60% {
+    transform: rotate(-4deg);
+  }
+  80% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes cork-fly {
+  to {
+    transform: translate(42vw, -80vh) rotate(620deg);
+    opacity: 0.2;
+  }
+}
+
+.burst {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: none;
+}
+
+.burst.is-on {
+  display: block;
+}
+
+/* ---------- Блёстки ---------- */
+
+.spark {
+  position: absolute;
+  width: 78px;
+  fill: var(--champ);
+  pointer-events: none;
+}
+
+.spark path,
+.spark circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+
+.spark path:nth-child(2) {
+  animation-delay: -0.9s;
+}
+
+.spark path:nth-child(3) {
+  animation-delay: -1.7s;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+  50% {
+    opacity: 0.25;
+    scale: 0.6;
+  }
+}
+
+.spark-a {
+  top: 9%;
+  left: 7%;
+}
+
+.spark-b {
+  bottom: 12%;
+  right: 6%;
+  rotate: 180deg;
+}
+
+.reveal > .spark,
+.reveal.is-in > .spark {
+  top: 18px;
+  transform: none;
+  transition: opacity 1.2s ease 0.3s;
+}
+
+.spark-tr {
+  right: 10px;
+}
+
+.spark-tl {
+  left: 10px;
+  scale: -1 1;
+}
+
+/* ---------- Всё приглашение ---------- */
+
+.hall {
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--blush);
+  overflow: hidden;
+}
+
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  padding: max(40px, env(safe-area-inset-top)) var(--pad) 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffe9e4;
+  background:
+    radial-gradient(90% 50% at 50% 28%, rgba(222, 127, 152, 0.75), rgba(122, 31, 61, 0) 75%),
+    linear-gradient(180deg, #8a2748, #4f1026);
+  overflow: hidden;
+}
+
+.dust {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero > *:not(.dust) {
+  position: relative;
+}
+
+.hero-label {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  text-transform: uppercase;
+  color: var(--champ-lit);
+}
+
+/* Фото в овальной раме с вращающимся кольцом */
+.oval {
+  position: relative;
+  margin-top: 24px;
+  width: min(62vw, 232px);
+  aspect-ratio: 3 / 4;
+}
+
+.oval img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 30%;
+  border-radius: 50%;
+  border: 3px solid #fff3ea;
+  box-shadow: 0 24px 46px rgba(44, 9, 21, 0.5);
+}
+
+.oval-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 1px dashed var(--champ-lit);
+  opacity: 0.8;
+  animation: turn 50s linear infinite;
+}
+
+@keyframes turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hero-name {
+  margin-top: 20px;
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(84px, 26vw, 112px);
+  line-height: 1;
+  color: #fff3ea;
+  text-shadow: 0 4px 22px rgba(44, 9, 21, 0.5);
+}
+
+.split span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px) rotate(6deg);
+}
+
+.hero-sub {
+  margin-top: 6px;
+  font-style: italic;
+  font-size: 21px;
+  color: #ffd9d6;
+}
+
+.hero-date {
+  margin-top: 20px;
+  padding: 9px 18px;
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--berry-deep);
+  background: var(--champ-lit);
+  border-radius: 999px;
+  box-shadow: 0 10px 22px rgba(44, 9, 21, 0.35);
+}
+
+.scroll-cue {
+  margin-top: 22px;
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 233, 228, 0.75);
+}
+
+.scroll-cue::after {
+  content: "";
+  display: block;
+  width: 7px;
+  height: 7px;
+  margin: 10px auto 0;
+  border-right: 1px solid var(--champ-lit);
+  border-bottom: 1px solid var(--champ-lit);
+  transform: rotate(45deg);
+  animation: nudge 1.8s ease-in-out infinite;
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(0) rotate(45deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(7px) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+/* Выход главного экрана */
+.hero-label,
+.oval,
+.hero-sub,
+.hero-date,
+.scroll-cue {
+  opacity: 0;
+}
+
+.hero-label,
+.hero-sub,
+.hero-date,
+.scroll-cue {
+  transform: translateY(16px);
+}
+
+.oval {
+  transform: scale(0.8);
+}
+
+body.is-live .hero-label {
+  animation: rise 1s var(--ease) 1.3s forwards;
+}
+
+body.is-live .oval {
+  animation: zoom 1.4s var(--ease) 1.5s forwards;
+}
+
+body.is-live .split span {
+  animation-name: letter;
+  animation-duration: 0.8s;
+  animation-timing-function: var(--ease);
+  animation-fill-mode: forwards;
+}
+
+body.is-live .hero-sub {
+  animation: rise 1s var(--ease) 3s forwards;
+}
+
+body.is-live .hero-date {
+  animation: rise 1s var(--ease) 3.3s forwards;
+}
+
+body.is-live .scroll-cue {
+  animation: rise 1s var(--ease) 3.9s forwards;
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes zoom {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes letter {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Страницы ---------- */
+
+.page {
+  position: relative;
+  padding: 66px var(--pad);
+  text-align: center;
+  background: var(--blush);
+}
+
+.page-tint {
+  background: var(--blush-deep);
+  padding-top: 84px;
+}
+
+.emblem {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  fill: none;
+  stroke: var(--berry-lit);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.emblem path,
+.emblem circle,
+.emblem rect,
+.ico path,
+.ico circle,
+.ico rect {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 2.2s var(--ease) 0.3s;
+}
+
+.reveal.is-in .emblem path,
+.reveal.is-in .emblem circle,
+.reveal.is-in .emblem rect,
+.reveal.is-in .ico path,
+.reveal.is-in .ico circle,
+.reveal.is-in .ico rect {
+  stroke-dashoffset: 0;
+}
+
+.label {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: 0.36em;
+  text-indent: 0.36em;
+  text-transform: uppercase;
+  color: var(--berry-lit);
+}
+
+h2 {
+  margin-top: 10px;
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(30px, 8.6vw, 38px);
+  line-height: 1.15;
+  color: var(--berry);
+}
+
+.lead {
+  margin: 16px auto 0;
+  max-width: 330px;
+  color: #5a2f3c;
+}
+
+.sign {
+  margin-top: 14px;
+  font-family: var(--script);
+  font-size: 40px;
+  line-height: 1.1;
+  color: var(--berry-lit);
+}
+
+.note {
+  margin: 14px auto 0;
+  max-width: 300px;
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+/* Нитка жемчуга по верху розовых блоков */
+.garland {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 100%;
+  height: 36px;
+  fill: #fffaf5;
+  filter: drop-shadow(0 2px 2px rgba(122, 31, 61, 0.25));
+  transform-origin: 50% 0;
+  animation: swing 5s ease-in-out infinite;
+}
+
+.reveal > .garland,
+.reveal.is-in > .garland {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+@keyframes swing {
+  0%,
+  100% {
+    transform: skewX(-2deg);
+  }
+  50% {
+    transform: skewX(2deg);
+  }
+}
+
+/* Тёмные блоки: «пена» по верхнему и нижнему краю */
+.page-dark {
+  color: #ffe1dc;
+  background:
+    radial-gradient(100% 50% at 50% 0, rgba(162, 49, 88, 0.9), rgba(79, 16, 38, 0) 75%),
+    linear-gradient(180deg, #7a1f3d, #4f1026);
+  padding-top: 84px;
+  padding-bottom: 84px;
+}
+
+.page-dark::before,
+.page-dark::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 22px;
+  background:
+    radial-gradient(circle at 50% 0, var(--edge) 15px, transparent 16px) 0 0 / 44px 22px repeat-x,
+    radial-gradient(circle at 50% 0, var(--edge) 9px, transparent 10px) 22px 0 / 44px 22px repeat-x;
+}
+
+.page-dark::before {
+  top: -1px;
+  --edge: var(--blush-deep);
+}
+
+.page-dark::after {
+  bottom: -1px;
+  --edge: var(--blush);
+  transform: scaleY(-1);
+}
+
+#rsvp::before {
+  --edge: var(--blush);
+}
+
+.page-dark .emblem {
+  stroke: var(--champ-lit);
+}
+
+.page-dark .label {
+  color: var(--champ-lit);
+}
+
+.page-dark h2 {
+  color: #fff3ea;
+}
+
+.page-dark .lead {
+  color: #ffd3cf;
+}
+
+/* Два фото внахлёст */
+.duo {
+  position: relative;
+  height: 430px;
+  background: var(--blush);
+}
+
+.duo figure {
+  position: absolute;
+  width: 58%;
+  padding: 7px;
+  background: #fffaf6;
+  box-shadow: 0 18px 34px rgba(122, 31, 61, 0.22);
+  overflow: hidden;
+}
+
+.duo img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.duo-a {
+  left: 6%;
+  top: 8px;
+  rotate: -5deg;
+}
+
+.duo-b {
+  right: 6%;
+  top: 96px;
+  rotate: 4deg;
+}
+
+.reveal.duo > figure {
+  opacity: 0;
+  transform: translateY(40px) scale(0.86);
+  transition: opacity 1s ease, transform 1.5s var(--ease);
+}
+
+.reveal.duo.is-in > figure {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.duo.is-in > .duo-b {
+  transition-delay: 0.35s;
+}
+
+.duo-note {
+  position: absolute;
+  left: 9%;
+  bottom: 8px;
+  font-family: var(--script);
+  font-size: 46px;
+  line-height: 1;
+  color: var(--berry-lit);
+  rotate: -8deg;
+}
+
+/* Календарь: дата отмечена сердцем */
+.cal {
+  margin: 24px auto 0;
+  max-width: 300px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 6px;
+  font-family: var(--display);
+  font-size: 16px;
+}
+
+.cal span {
+  height: 36px;
+  display: grid;
+  place-items: center;
+  color: #5a2f3c;
+}
+
+.cal .cal-wd {
+  height: 26px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cal .cal-day {
+  position: relative;
+  color: #fff;
+  z-index: 0;
+}
+
+.cal .cal-day::before {
+  content: "";
+  position: absolute;
+  width: 46px;
+  height: 42px;
+  margin-top: 3px;
+  background: var(--berry-lit);
+  clip-path: path("M23 41C8 30 2 22 2 13A11 11 0 0 1 23 8a11 11 0 0 1 21 5c0 9-6 17-21 28z");
+  z-index: -1;
+  animation: beat 1.4s ease-in-out infinite;
+}
+
+@keyframes beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.18);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.12);
+  }
+}
+
+.until {
+  margin-top: 30px;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.countdown {
+  margin: 12px auto 0;
+  max-width: 320px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.countdown div {
+  padding: 12px 0 9px;
+  background: #fffaf6;
+  border-radius: 14px;
+  box-shadow: 0 8px 16px rgba(122, 31, 61, 0.1);
+  overflow: hidden;
+}
+
+.countdown b {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--berry);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.countdown b.flip {
+  animation: flip 0.45s var(--ease);
+}
+
+@keyframes flip {
+  from {
+    transform: translateY(-70%);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.countdown span {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--display);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.countdown.is-over {
+  display: block;
+  font-style: italic;
+  color: var(--berry);
+}
+
+/* План дня */
+.timeline {
+  position: relative;
+  list-style: none;
+  padding: 0 0 0 64px;
+  margin: 30px auto 0;
+  max-width: 330px;
+  text-align: left;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 46px;
+  bottom: 30px;
+  width: 0;
+  border-left: 1px dashed rgba(243, 223, 189, 0.7);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 3.2s var(--ease) 0.4s;
+}
+
+.reveal.is-in .timeline::before {
+  transform: scaleY(1);
+}
+
+.timeline li {
+  position: relative;
+  padding-bottom: 24px;
+  opacity: 0;
+  transform: translateX(16px);
+  transition: opacity 0.8s ease, transform 0.8s var(--ease);
+}
+
+.timeline li:last-child {
+  padding-bottom: 0;
+}
+
+.reveal.is-in .timeline li {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.is-in .timeline li:nth-child(1) { transition-delay: 0.5s; }
+.reveal.is-in .timeline li:nth-child(2) { transition-delay: 0.9s; }
+.reveal.is-in .timeline li:nth-child(3) { transition-delay: 1.3s; }
+.reveal.is-in .timeline li:nth-child(4) { transition-delay: 1.7s; }
+.reveal.is-in .timeline li:nth-child(5) { transition-delay: 2.1s; }
+.reveal.is-in .timeline li:nth-child(6) { transition-delay: 2.5s; }
+
+.reveal.is-in .timeline li:nth-child(1) .ico * { transition-delay: 0.6s; }
+.reveal.is-in .timeline li:nth-child(2) .ico * { transition-delay: 1s; }
+.reveal.is-in .timeline li:nth-child(3) .ico * { transition-delay: 1.4s; }
+.reveal.is-in .timeline li:nth-child(4) .ico * { transition-delay: 1.8s; }
+.reveal.is-in .timeline li:nth-child(5) .ico * { transition-delay: 2.2s; }
+.reveal.is-in .timeline li:nth-child(6) .ico * { transition-delay: 2.6s; }
+
+.timeline .ico {
+  position: absolute;
+  left: -64px;
+  top: 0;
+  width: 46px;
+  height: 46px;
+  padding: 8px;
+  border-radius: 50%;
+  background: #fff3ea;
+  box-shadow: 0 8px 16px rgba(44, 9, 21, 0.35);
+  fill: none;
+  stroke: var(--berry);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.timeline time {
+  display: block;
+  font-family: var(--display);
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  color: var(--champ-lit);
+}
+
+.timeline strong {
+  display: block;
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 1.2;
+  color: #fff3ea;
+}
+
+.timeline p {
+  margin-top: 2px;
+  font-size: 18px;
+  line-height: 1.3;
+  color: #ffcfcc;
+}
+
+/* Место */
+.venue {
+  margin: 24px 0 4px;
+  padding: 7px;
+  background: #fffaf6;
+  border-radius: 120px 120px 14px 14px / 70px 70px 14px 14px;
+  box-shadow: 0 18px 34px rgba(122, 31, 61, 0.2);
+  overflow: hidden;
+}
+
+.venue img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 114px 114px 10px 10px / 64px 64px 10px 10px;
+}
+
+.reveal > .venue {
+  opacity: 0;
+  transform: scale(0.88);
+  transition: opacity 1.1s ease 0.2s, transform 1.6s var(--ease) 0.2s;
+}
+
+.reveal.is-in > .venue {
+  opacity: 1;
+  transform: none;
+}
+
+.map {
+  margin: 26px calc(var(--pad) * -1) 0;
+  height: 250px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--blush-deep);
+}
+
+.map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Оттенки дресс-кода: пузырьки, которые всплывают */
+.swatches {
+  margin-top: 26px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.swatches span {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.75) 0, rgba(255, 255, 255, 0) 30%),
+    var(--c);
+  box-shadow: 0 10px 18px rgba(122, 31, 61, 0.2), inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+  animation: float 3.4s ease-in-out infinite;
+}
+
+.swatches span:nth-child(2) { animation-delay: -0.7s; }
+.swatches span:nth-child(3) { animation-delay: -1.4s; }
+.swatches span:nth-child(4) { animation-delay: -2.1s; }
+.swatches span:nth-child(5) { animation-delay: -2.8s; }
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Список невесты: галочки ставятся сами */
+.take {
+  list-style: none;
+  padding: 0;
+  margin: 24px auto 0;
+  max-width: 320px;
+  text-align: left;
+}
+
+.take li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 13px 0;
+  border-bottom: 1px dashed var(--line);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s ease, transform 0.8s var(--ease);
+}
+
+.take li:last-child {
+  border-bottom: 0;
+}
+
+.tick {
+  width: 30px;
+  height: 30px;
+  fill: #fffaf6;
+  stroke: var(--rose);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tick path {
+  fill: none;
+  stroke: var(--berry-lit);
+  stroke-width: 2.2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.reveal.is-in .take li {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.is-in .take li .tick path {
+  stroke-dashoffset: 0;
+}
+
+.reveal.is-in .take li:nth-child(1) { transition-delay: 0.3s; }
+.reveal.is-in .take li:nth-child(2) { transition-delay: 0.6s; }
+.reveal.is-in .take li:nth-child(3) { transition-delay: 0.9s; }
+.reveal.is-in .take li:nth-child(4) { transition-delay: 1.2s; }
+.reveal.is-in .take li:nth-child(1) .tick path { transition-delay: 0.9s; }
+.reveal.is-in .take li:nth-child(2) .tick path { transition-delay: 1.3s; }
+.reveal.is-in .take li:nth-child(3) .tick path { transition-delay: 1.7s; }
+.reveal.is-in .take li:nth-child(4) .tick path { transition-delay: 2.1s; }
+
+/* Анкета */
+.field {
+  display: block;
+  margin: 26px auto 0;
+  max-width: 320px;
+  text-align: left;
+}
+
+.field span {
+  display: block;
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champ-lit);
+}
+
+.field input {
+  margin-top: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  font-family: var(--serif);
+  font-size: 21px;
+  color: var(--ink);
+  background: #fff6f1;
+  border: 0;
+  border-radius: 999px;
+  box-shadow: inset 0 2px 5px rgba(122, 31, 61, 0.15);
+}
+
+.field input::placeholder {
+  color: rgba(122, 31, 61, 0.35);
+}
+
+.field input:focus {
+  outline: 2px solid var(--champ-lit);
+  outline-offset: 2px;
+}
+
+.answers {
+  margin: 22px auto 0;
+  max-width: 320px;
+  display: grid;
+  gap: 12px;
+}
+
+/* Кнопка-капсула с пузырьками внутри */
+.btn {
+  position: relative;
+  overflow: hidden;
+  min-height: 60px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 23px;
+  color: var(--berry-deep);
+  background: linear-gradient(180deg, #fbe9c9, #e7c48f);
+  box-shadow: 0 12px 24px rgba(44, 9, 21, 0.35), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+  transition: transform 0.2s ease, filter 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn span {
+  position: relative;
+}
+
+.btn::before,
+.btn::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.35);
+  animation: fizz 2.6s ease-in infinite;
+}
+
+.btn::before {
+  left: 16%;
+}
+
+.btn::after {
+  left: 80%;
+  width: 8px;
+  height: 8px;
+  animation-delay: -1.2s;
+}
+
+@keyframes fizz {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-84px);
+    opacity: 0;
+  }
+}
+
+.btn-ghost {
+  color: #ffe1dc;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(243, 223, 189, 0.75);
+}
+
+.btn-ghost::before,
+.btn-ghost::after {
+  display: none;
+}
+
+.btn:hover {
+  filter: brightness(1.05);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.hint {
+  margin: 18px auto 0;
+  max-width: 300px;
+  font-style: italic;
+  color: var(--champ-lit);
+}
+
+.hint.is-error {
+  color: #ffc2b5;
+}
+
+.text-btn {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 12px 26px;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 19px;
+  text-decoration: none;
+  color: var(--berry);
+  border: 1px solid var(--rose);
+  border-radius: 999px;
+}
+
+.text-btn[hidden] {
+  display: none;
+}
+
+/* Финал */
+.finale {
+  position: relative;
+  min-height: 96dvh;
+  display: flex;
+  align-items: flex-end;
+  background: var(--berry-deep);
+}
+
+.finale > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.finale-copy {
+  position: relative;
+  width: 100%;
+  padding: 130px var(--pad) max(96px, env(safe-area-inset-bottom));
+  text-align: center;
+  color: #ffe9e4;
+  background: linear-gradient(180deg, rgba(79, 16, 38, 0), rgba(79, 16, 38, 0.9) 48%, #4f1026);
+}
+
+.finale-line {
+  font-style: italic;
+  font-size: 22px;
+}
+
+.finale-name {
+  font-family: var(--script);
+  font-size: clamp(70px, 21vw, 92px);
+  line-height: 1.05;
+  color: #fff3ea;
+}
+
+.finale-date {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champ-lit);
+}
+
+.credit {
+  margin: 24px auto 0;
+  max-width: 290px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(255, 225, 220, 0.6);
+}
+
+/* Кнопка звука */
+.sound {
+  position: fixed;
+  z-index: 40;
+  right: max(16px, calc(50% - 224px));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--champ-lit);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  background: rgba(79, 16, 38, 0.9);
+  box-shadow: 0 8px 20px rgba(44, 9, 21, 0.4);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sound[hidden] {
+  display: none;
+}
+
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.bars i {
+  width: 2px;
+  height: 100%;
+  background: var(--champ-lit);
+  transform-origin: bottom;
+  animation: eq 0.9s ease-in-out infinite alternate;
+}
+
+.bars i:nth-child(2) { animation-delay: -0.3s; }
+.bars i:nth-child(3) { animation-delay: -0.6s; }
+.bars i:nth-child(4) { animation-delay: -0.15s; }
+
+@keyframes eq {
+  from {
+    transform: scaleY(0.25);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.sound.is-off .bars i {
+  animation: none;
+  transform: scaleY(0.2);
+  opacity: 0.6;
+}
+
+/* Появление блоков при прокрутке */
+.reveal > .emblem,
+.reveal > .label,
+.reveal > h2,
+.reveal > .lead,
+.reveal > .sign,
+.reveal > .cal,
+.reveal > .until,
+.reveal > .countdown,
+.reveal > .map,
+.reveal > .note,
+.reveal > .swatches,
+.reveal > .field,
+.reveal > .answers,
+.reveal > .duo-note,
+.reveal > .finale-line,
+.reveal > .finale-name,
+.reveal > .finale-date,
+.reveal > .credit,
+.reveal > .spark {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1s ease, transform 1s var(--ease);
+}
+
+.reveal > .cal,
+.reveal > .map {
+  transform: scale(0.9);
+}
+
+.reveal.is-in > * {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.is-in > *:nth-child(3) { transition-delay: 0.1s; }
+.reveal.is-in > *:nth-child(4) { transition-delay: 0.2s; }
+.reveal.is-in > *:nth-child(5) { transition-delay: 0.3s; }
+.reveal.is-in > *:nth-child(6) { transition-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01s !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01s !important;
+    transition-delay: 0s !important;
+  }
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Юбилей Марины</title>
+    <meta
+      name="description"
+      content="Приглашение на юбилей Марины. Демо-работа: имя, дата и место вымышлены."
+    />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=10" />
+  </head>
+  <body>
+    <div id="autumn-scene" class="autumn-scene" hidden aria-hidden="true">
+      <div id="autumn-leaves" class="autumn-leaves" aria-hidden="true"></div>
+    </div>
+    <div class="stage">
+      <div id="envelope" class="envelope" aria-hidden="false">
+        <div class="env-ornament" aria-hidden="true"></div>
+        <p class="env-kicker">Приглашение</p>
+        <p class="env-sub">на юбилей</p>
+        <p class="env-script" data-fill="honoree">Марина</p>
+        <p class="env-age" data-fill="age-line" hidden></p>
+        <button type="button" id="open-invite" class="seal" aria-label="Открыть приглашение">
+          <span class="seal-letter">М</span>
+          <span class="seal-text">Открой<br />меня</span>
+        </button>
+        <p class="env-music-hint" data-music-hint hidden>
+          Если музыка отвлекает — выключите её кнопкой внизу
+        </p>
+      </div>
+
+      <article id="letter" class="letter" hidden>
+        <header class="hero plate has-photo" id="hero">
+          <img src="photos/01-envelope.jpg" alt="Марина" />
+          <div class="hero-veil"></div>
+          <div class="hero-copy">
+            <p class="kicker" data-fill="hero-kicker">25 сентября 2027 г. · 18:00 · Якутск</p>
+            <h1 data-fill="honoree">Марина</h1>
+            <p class="hero-age" data-fill="age-line">55 лет</p>
+            <p class="scroll-hint">листайте вниз</p>
+          </div>
+        </header>
+
+        <section class="plate plate-photo is-intro-photo">
+          <img src="photos/02-hero.jpg" alt="" />
+          <div class="photo-copy">
+            <p class="script-head">Дорогие коллеги</p>
+            <p>
+              Хочу пригласить вас на юбилей и провести этот особенный день
+              в доброй компании.
+            </p>
+          </div>
+        </section>
+
+        <section class="block when" aria-labelledby="when-title">
+          <p class="script-head" id="when-title">Дата</p>
+          <div id="calendar" class="cal" role="img"></div>
+          <p class="event-when" data-fill="event-when"></p>
+          <div id="countdown" class="countdown" aria-live="polite"></div>
+        </section>
+
+        <section class="block where" aria-labelledby="where-title">
+          <p class="script-head" id="where-title">Локация</p>
+          <p class="place" data-fill="venue-name">Ресторан «Тёплый вечер»</p>
+          <p class="addr" data-fill="venue-address">Якутск<br />пр. Ленина, 1</p>
+          <div class="map-bleed" id="map-wrap" hidden>
+            <iframe class="map-frame" id="map-frame" title="Карта места праздника" allowfullscreen></iframe>
+          </div>
+          <p class="map-links" id="map-links" hidden></p>
+        </section>
+
+        <section class="plate plate-photo is-rsvp-photo">
+          <img src="photos/03.jpg" alt="" />
+          <div class="photo-copy">
+            <p>
+              Пусть праздник получится живым, уютным и наполненным приятными
+              моментами, которые потом захочется вспоминать с улыбкой.
+            </p>
+          </div>
+        </section>
+
+        <section class="block rsvp" aria-labelledby="rsvp-title">
+          <p class="script-head" id="rsvp-title">Анкета гостя</p>
+          <p>
+            Подтвердите, пожалуйста, своё присутствие, заполнив анкету ниже.
+          </p>
+          <div class="guest-grid">
+            <label>
+              Ваше имя и фамилия
+              <input
+                id="guest-name"
+                type="text"
+                autocomplete="name"
+                placeholder="Иван Иванов"
+                required
+              />
+            </label>
+          </div>
+          <div class="rsvp-row">
+            <button type="button" class="btn" data-rsvp="yes">Приду</button>
+            <button type="button" class="btn ghost" data-rsvp="no">Не приду</button>
+          </div>
+          <p id="rsvp-hint" class="note" hidden></p>
+        </section>
+
+        <section class="block max-group" aria-labelledby="maxgroup-title">
+          <p class="script-head" id="maxgroup-title">Фото</p>
+          <p>
+            Мы создали группу в MAX, куда можно скидывать фото с этого вечера.
+            Так все снимки соберутся в одном месте, и после праздника мы поделимся
+            общим альбомом.
+          </p>
+          <p class="map-links">
+            <a class="btn ghost" id="max-group-link" href="#" target="_blank" rel="noreferrer"
+              >Открыть группу в MAX</a
+            >
+          </p>
+        </section>
+
+        <footer class="close has-photo">
+          <img class="close-photo" src="photos/04.jpg" alt="" />
+          <div class="close-copy">
+            <p class="close-quote">
+              Ваш приход станет для меня настоящей радостью и самым теплым
+              знаком внимания.
+            </p>
+            <p class="close-hello">С теплом,</p>
+            <p class="close-names" data-fill="honoree">Марина</p>
+            <p class="close-meta" data-fill="close-meta">Якутск</p>
+            <p class="demo-credit">Демо-работа · Музыка: Kevin MacLeod — «Heartwarming» (CC BY 4.0) · Фото: Pexels</p>
+          </div>
+        </footer>
+      </article>
+
+      <audio id="bg-music" loop preload="auto"></audio>
+      <button
+        type="button"
+        id="music-toggle"
+        class="music-btn"
+        hidden
+        aria-pressed="true"
+        aria-label="Выключить музыку"
+      >
+        <span aria-hidden="true">♪</span>
+        музыка
+      </button>
+    </div>
+    <script src="config.js?v=10"></script>
+    <script src="script.js?v=10"></script>
+  </body>
+</html>

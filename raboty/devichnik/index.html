@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Девичник Дарины — 26 июня 2027</title>
+    <meta name="description" content="Приглашение на девичник. Демо-работа: имена, дата и место вымышлены." />
+    <meta name="theme-color" content="#f6dfe0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=2" />
+  </head>
+  <body class="is-locked">
+    <!-- Вход: бутылка игристого -->
+    <div class="gate" id="gate">
+      <svg class="spark spark-a" viewBox="0 0 90 90" aria-hidden="true"><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(30 34) scale(2.2)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(66 20) scale(1.1)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(64 62) scale(1.5)" /><circle cx="14" cy="70" r="2" /><circle cx="82" cy="42" r="1.5" /></svg>
+      <svg class="spark spark-b" viewBox="0 0 90 90" aria-hidden="true"><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(30 34) scale(2.2)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(66 20) scale(1.1)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(64 62) scale(1.5)" /><circle cx="14" cy="70" r="2" /><circle cx="82" cy="42" r="1.5" /></svg>
+      <p class="gate-kicker">Ты приглашена на</p>
+      <p class="gate-title">Девичник</p>
+      <button type="button" class="pop" id="open" aria-label="Открыть игристое">
+        <svg class="cork" viewBox="0 0 44 52" aria-hidden="true">
+          <path d="M6 16a16 13 0 0 1 32 0v7h-5v25H11V23H6z" />
+          <path class="cork-line" d="M11 30h22 M11 38h22" />
+        </svg>
+        <svg class="bottle" viewBox="0 0 140 330" aria-hidden="true">
+          <path class="glass" d="M58 66V122C58 150 30 160 30 200V300Q30 316 46 316H94Q110 316 110 300V200C110 160 82 150 82 122V66Z" />
+          <path class="foil" d="M55 60H85V128C85 136 80 142 76 148H64C60 142 55 136 55 128Z" />
+          <path class="foil-line" d="M55 76H85 M55 120H85" />
+          <rect class="tag" x="38" y="212" width="64" height="62" rx="3" />
+          <path class="tag-heart" d="M70 258C60 251 56 246 56 241a6.5 6.5 0 0 1 14-2 6.5 6.5 0 0 1 14 2c0 5-4 10-14 17z" />
+          <path class="shine" d="M42 204V296" />
+        </svg>
+      </button>
+      <p class="gate-hint">Нажми на пробку —<br />откроем праздник</p>
+    </div>
+
+    <canvas class="burst" id="burst" aria-hidden="true"></canvas>
+
+    <main class="hall">
+      <header class="hero">
+        <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+        <p class="hero-label">Команда невесты</p>
+        <div class="oval">
+          <span class="oval-ring" aria-hidden="true"></span>
+          <img src="photos/nevesta.jpg" alt="Невеста с подругами поднимают бокалы" />
+        </div>
+        <h1 class="hero-name"><span class="split">Дарина</span></h1>
+        <p class="hero-sub">выходит замуж — отмечаем по‑девичьи</p>
+        <p class="hero-date">26 июня 2027 · суббота · 15:00</p>
+        <p class="scroll-cue" aria-hidden="true">листай вниз</p>
+      </header>
+
+      <section class="page reveal">
+        <svg class="spark spark-tr" viewBox="0 0 90 90" aria-hidden="true"><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(30 34) scale(2.2)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(66 20) scale(1.1)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(64 62) scale(1.5)" /><circle cx="14" cy="70" r="2" /><circle cx="82" cy="42" r="1.5" /></svg>
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 40C10 30 6 22 6 16a9 9 0 0 1 18-3 9 9 0 0 1 18 3c0 6-4 14-18 24z" /></svg>
+        <p class="label">Девочки!</p>
+        <h2>Собираю самых близких</h2>
+        <p class="lead">
+          Скоро я стану женой, а&nbsp;пока хочу провести целый день только с&nbsp;вами:
+          смеяться, танцевать и&nbsp;вспоминать всё, что было. Без вас никак.
+        </p>
+        <p class="sign">Ваша Дарина</p>
+      </section>
+
+      <section class="duo reveal">
+        <figure class="duo-a"><img src="photos/bokaly.jpg" alt="Бокалы с розовым игристым" loading="lazy" /></figure>
+        <figure class="duo-b"><img src="photos/tost.jpg" alt="Подруги чокаются бокалами" loading="lazy" /></figure>
+        <p class="duo-note">за нас!</p>
+      </section>
+
+      <section class="page page-tint reveal">
+        <svg class="garland" viewBox="0 0 375 36" preserveAspectRatio="none" aria-hidden="true"><circle cx="0.0" cy="6.0" r="4.6" /><circle cx="6.2" cy="9.4" r="3.2" /><circle cx="12.5" cy="12.8" r="3.2" /><circle cx="18.8" cy="16.0" r="3.2" /><circle cx="25.0" cy="18.9" r="3.2" /><circle cx="31.2" cy="21.6" r="3.2" /><circle cx="37.5" cy="23.8" r="3.2" /><circle cx="43.8" cy="25.6" r="3.2" /><circle cx="50.0" cy="26.9" r="3.2" /><circle cx="56.2" cy="27.7" r="3.2" /><circle cx="62.5" cy="28.0" r="3.2" /><circle cx="68.8" cy="27.7" r="3.2" /><circle cx="75.0" cy="26.9" r="3.2" /><circle cx="81.2" cy="25.6" r="3.2" /><circle cx="87.5" cy="23.8" r="3.2" /><circle cx="93.8" cy="21.6" r="3.2" /><circle cx="100.0" cy="18.9" r="3.2" /><circle cx="106.2" cy="16.0" r="3.2" /><circle cx="112.5" cy="12.8" r="3.2" /><circle cx="118.8" cy="9.4" r="3.2" /><circle cx="125.0" cy="6.0" r="4.6" /><circle cx="131.2" cy="9.4" r="3.2" /><circle cx="137.5" cy="12.8" r="3.2" /><circle cx="143.8" cy="16.0" r="3.2" /><circle cx="150.0" cy="18.9" r="3.2" /><circle cx="156.2" cy="21.6" r="3.2" /><circle cx="162.5" cy="23.8" r="3.2" /><circle cx="168.8" cy="25.6" r="3.2" /><circle cx="175.0" cy="26.9" r="3.2" /><circle cx="181.2" cy="27.7" r="3.2" /><circle cx="187.5" cy="28.0" r="3.2" /><circle cx="193.8" cy="27.7" r="3.2" /><circle cx="200.0" cy="26.9" r="3.2" /><circle cx="206.2" cy="25.6" r="3.2" /><circle cx="212.5" cy="23.8" r="3.2" /><circle cx="218.8" cy="21.6" r="3.2" /><circle cx="225.0" cy="18.9" r="3.2" /><circle cx="231.2" cy="16.0" r="3.2" /><circle cx="237.5" cy="12.8" r="3.2" /><circle cx="243.8" cy="9.4" r="3.2" /><circle cx="250.0" cy="6.0" r="4.6" /><circle cx="256.2" cy="9.4" r="3.2" /><circle cx="262.5" cy="12.8" r="3.2" /><circle cx="268.8" cy="16.0" r="3.2" /><circle cx="275.0" cy="18.9" r="3.2" /><circle cx="281.2" cy="21.6" r="3.2" /><circle cx="287.5" cy="23.8" r="3.2" /><circle cx="293.8" cy="25.6" r="3.2" /><circle cx="300.0" cy="26.9" r="3.2" /><circle cx="306.2" cy="27.7" r="3.2" /><circle cx="312.5" cy="28.0" r="3.2" /><circle cx="318.8" cy="27.7" r="3.2" /><circle cx="325.0" cy="26.9" r="3.2" /><circle cx="331.2" cy="25.6" r="3.2" /><circle cx="337.5" cy="23.8" r="3.2" /><circle cx="343.8" cy="21.6" r="3.2" /><circle cx="350.0" cy="18.9" r="3.2" /><circle cx="356.2" cy="16.0" r="3.2" /><circle cx="362.5" cy="12.8" r="3.2" /><circle cx="368.8" cy="9.4" r="3.2" /><circle cx="375.0" cy="6.0" r="4.6" /></svg>
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M8 12h32v28H8z M8 20h32 M16 8v8 M32 8v8" /><path pathLength="1" d="M24 36c-5-3.5-7-6-7-8.5a3.5 3.5 0 0 1 7-1 3.5 3.5 0 0 1 7 1c0 2.5-2 5-7 8.5z" /></svg>
+        <p class="label">Когда</p>
+        <h2>Июнь 2027</h2>
+        <div class="cal" id="cal" role="img" aria-label="Календарь: июнь 2027, девичник в субботу 26-го"></div>
+        <p class="until">До девичника осталось</p>
+        <div class="countdown" id="countdown" aria-live="off"></div>
+      </section>
+
+      <section class="page page-dark reveal">
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M13 8h22v32H13z M18 16h12 M18 22h12 M18 28h8 M18 34h10" /></svg>
+        <p class="label">План дня</p>
+        <h2>От первого бокала до сюрприза</h2>
+        <ol class="timeline">
+          <li>
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M9 10h30a15 13 0 0 1-30 0z M24 23v16 M16 40h16" /><circle pathLength="1" cx="19" cy="6" r="1.5" /><circle pathLength="1" cx="27" cy="4" r="1" /><circle pathLength="1" cx="31" cy="7" r="1.5" /></svg>
+            <time>15:00</time>
+            <strong>Сбор команды</strong>
+            <p>Первый бокал игристого и объятия</p>
+          </li>
+          <li>
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M7 16h8l3-4h12l3 4h8v22H7z" /><circle pathLength="1" cx="24" cy="26" r="7" /></svg>
+            <time>16:00</time>
+            <strong>Фотосессия</strong>
+            <p>Все в розовом, невеста в белом</p>
+          </li>
+          <li>
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M7 10h34L24 27z M24 27v12 M16 40h16 M31 6l5-3" /><circle pathLength="1" cx="30" cy="15" r="2.2" /></svg>
+            <time>17:30</time>
+            <strong>Коктейльный мастер-класс</strong>
+            <p>Смешиваем, пробуем, придумываем названия</p>
+          </li>
+          <li>
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M6 34h36 M10 34a14 14 0 0 1 28 0 M24 20v-3 M21 15.5h6 M9 39h30" /></svg>
+            <time>19:00</time>
+            <strong>Ужин</strong>
+            <p>Длинный стол, тосты и истории про невесту</p>
+          </li>
+          <li>
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><rect pathLength="1" x="19" y="6" width="10" height="18" rx="5" /><path pathLength="1" d="M13 20a11 11 0 0 0 22 0 M24 31v9 M17 40h14" /></svg>
+            <time>21:00</time>
+            <strong>Караоке и танцы</strong>
+            <p>Поём всё, что знаем, и то, что не знаем</p>
+          </li>
+          <li>
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M8 20h32v8H8z M11 28v13h26V28 M24 20v21" /><path pathLength="1" d="M24 20c-6 0-10-3-9-7s8-2 9 7c1-9 8-11 9-7s-3 7-9 7z" /></svg>
+            <time>23:30</time>
+            <strong>Сюрприз для невесты</strong>
+            <p>Что именно — секрет до самого вечера</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="page reveal">
+        <svg class="spark spark-tl" viewBox="0 0 90 90" aria-hidden="true"><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(30 34) scale(2.2)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(66 20) scale(1.1)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(64 62) scale(1.5)" /><circle cx="14" cy="70" r="2" /><circle cx="82" cy="42" r="1.5" /></svg>
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 43c-8-10-12-16-12-22a12 12 0 0 1 24 0c0 6-4 12-12 22z" /><circle pathLength="1" cx="24" cy="21" r="4" /></svg>
+        <p class="label">Где</p>
+        <h2>Лофт «Розе»</h2>
+        <figure class="venue"><img src="photos/stol.jpg" alt="Стол с розовыми салфетками и цветами" loading="lazy" /></figure>
+        <p class="lead">Якутск, центр города.<br />Весь лофт на этот день только наш.</p>
+        <div class="map">
+          <iframe
+            title="Карта Якутска"
+            src="https://yandex.ru/map-widget/v1/?ll=129.732178%2C62.027221&z=14&l=map&scroll=false"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="note">В демо на карте показан центр города. В вашем приглашении будет точка места и маршрут в 2ГИС.</p>
+      </section>
+
+      <section class="page page-tint reveal">
+        <svg class="garland" viewBox="0 0 375 36" preserveAspectRatio="none" aria-hidden="true"><circle cx="0.0" cy="6.0" r="4.6" /><circle cx="6.2" cy="9.4" r="3.2" /><circle cx="12.5" cy="12.8" r="3.2" /><circle cx="18.8" cy="16.0" r="3.2" /><circle cx="25.0" cy="18.9" r="3.2" /><circle cx="31.2" cy="21.6" r="3.2" /><circle cx="37.5" cy="23.8" r="3.2" /><circle cx="43.8" cy="25.6" r="3.2" /><circle cx="50.0" cy="26.9" r="3.2" /><circle cx="56.2" cy="27.7" r="3.2" /><circle cx="62.5" cy="28.0" r="3.2" /><circle cx="68.8" cy="27.7" r="3.2" /><circle cx="75.0" cy="26.9" r="3.2" /><circle cx="81.2" cy="25.6" r="3.2" /><circle cx="87.5" cy="23.8" r="3.2" /><circle cx="93.8" cy="21.6" r="3.2" /><circle cx="100.0" cy="18.9" r="3.2" /><circle cx="106.2" cy="16.0" r="3.2" /><circle cx="112.5" cy="12.8" r="3.2" /><circle cx="118.8" cy="9.4" r="3.2" /><circle cx="125.0" cy="6.0" r="4.6" /><circle cx="131.2" cy="9.4" r="3.2" /><circle cx="137.5" cy="12.8" r="3.2" /><circle cx="143.8" cy="16.0" r="3.2" /><circle cx="150.0" cy="18.9" r="3.2" /><circle cx="156.2" cy="21.6" r="3.2" /><circle cx="162.5" cy="23.8" r="3.2" /><circle cx="168.8" cy="25.6" r="3.2" /><circle cx="175.0" cy="26.9" r="3.2" /><circle cx="181.2" cy="27.7" r="3.2" /><circle cx="187.5" cy="28.0" r="3.2" /><circle cx="193.8" cy="27.7" r="3.2" /><circle cx="200.0" cy="26.9" r="3.2" /><circle cx="206.2" cy="25.6" r="3.2" /><circle cx="212.5" cy="23.8" r="3.2" /><circle cx="218.8" cy="21.6" r="3.2" /><circle cx="225.0" cy="18.9" r="3.2" /><circle cx="231.2" cy="16.0" r="3.2" /><circle cx="237.5" cy="12.8" r="3.2" /><circle cx="243.8" cy="9.4" r="3.2" /><circle cx="250.0" cy="6.0" r="4.6" /><circle cx="256.2" cy="9.4" r="3.2" /><circle cx="262.5" cy="12.8" r="3.2" /><circle cx="268.8" cy="16.0" r="3.2" /><circle cx="275.0" cy="18.9" r="3.2" /><circle cx="281.2" cy="21.6" r="3.2" /><circle cx="287.5" cy="23.8" r="3.2" /><circle cx="293.8" cy="25.6" r="3.2" /><circle cx="300.0" cy="26.9" r="3.2" /><circle cx="306.2" cy="27.7" r="3.2" /><circle cx="312.5" cy="28.0" r="3.2" /><circle cx="318.8" cy="27.7" r="3.2" /><circle cx="325.0" cy="26.9" r="3.2" /><circle cx="331.2" cy="25.6" r="3.2" /><circle cx="337.5" cy="23.8" r="3.2" /><circle cx="343.8" cy="21.6" r="3.2" /><circle cx="350.0" cy="18.9" r="3.2" /><circle cx="356.2" cy="16.0" r="3.2" /><circle cx="362.5" cy="12.8" r="3.2" /><circle cx="368.8" cy="9.4" r="3.2" /><circle cx="375.0" cy="6.0" r="4.6" /></svg>
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M18 5v7l-4 8 4 2-7 20h26l-7-20 4-2-4-8V5 M18 12c2 3 10 3 12 0" /></svg>
+        <p class="label">Дресс-код</p>
+        <h2>Все оттенки розового</h2>
+        <p class="lead">От пудрового до малинового. Белый — только для невесты.</p>
+        <div class="swatches" aria-hidden="true">
+          <span style="--c: #f7d9dc"></span>
+          <span style="--c: #efb1bd"></span>
+          <span style="--c: #de7f98"></span>
+          <span style="--c: #b83a63"></span>
+          <span style="--c: #7a1f3d"></span>
+        </div>
+      </section>
+
+      <section class="page reveal">
+        <svg class="spark spark-tr" viewBox="0 0 90 90" aria-hidden="true"><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(30 34) scale(2.2)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(66 20) scale(1.1)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(64 62) scale(1.5)" /><circle cx="14" cy="70" r="2" /><circle cx="82" cy="42" r="1.5" /></svg>
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M10 17h28l-2 24H12z M17 17v-3a7 7 0 0 1 14 0v3" /></svg>
+        <p class="label">Что взять с собой</p>
+        <h2>Список невесты</h2>
+        <ul class="take"><li><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" /><path pathLength="1" d="M6.5 12.5l3.6 3.6 7.4-8.2" /></svg><span>Отличное настроение</span></li><li><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" /><path pathLength="1" d="M6.5 12.5l3.6 3.6 7.4-8.2" /></svg><span>Удобную обувь для танцев</span></li><li><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" /><path pathLength="1" d="M6.5 12.5l3.6 3.6 7.4-8.2" /></svg><span>Одну историю про невесту — смешную или трогательную</span></li><li><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" /><path pathLength="1" d="M6.5 12.5l3.6 3.6 7.4-8.2" /></svg><span>Заряженный телефон: фото будет много</span></li></ul>
+      </section>
+
+      <section class="page page-dark reveal" id="rsvp">
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M5 15h38v6a3.5 3.5 0 0 0 0 7v6H5v-6a3.5 3.5 0 0 0 0-7z" /><path pathLength="1" d="M24 31c-4-3-5.5-5-5.5-7a2.8 2.8 0 0 1 5.5-0.8 2.8 2.8 0 0 1 5.5 0.8c0 2-1.5 4-5.5 7z" /></svg>
+        <p class="label">Ответ</p>
+        <h2>Ты с нами?</h2>
+        <p class="lead">Ответь, пожалуйста, до&nbsp;10&nbsp;июня — бронируем стол и&nbsp;мастер-класс.</p>
+        <label class="field">
+          <span>Имя и фамилия</span>
+          <input id="guest" type="text" autocomplete="name" placeholder="Мария Иванова" />
+        </label>
+        <div class="answers">
+          <button type="button" class="btn" data-answer="yes"><span>Я в деле!</span></button>
+          <button type="button" class="btn btn-ghost" data-answer="no"><span>Не смогу</span></button>
+        </div>
+        <p class="hint" id="hint" role="status" hidden></p>
+      </section>
+
+      <section class="page reveal">
+        <svg class="spark spark-tl" viewBox="0 0 90 90" aria-hidden="true"><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(30 34) scale(2.2)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(66 20) scale(1.1)" /><path d="M0-10C1-3 3-1 10 0C3 1 1 3 0 10C-1 3-3 1-10 0C-3-1-1-3 0-10Z" transform="translate(64 62) scale(1.5)" /><circle cx="14" cy="70" r="2" /><circle cx="82" cy="42" r="1.5" /></svg>
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M7 16h8l3-4h12l3 4h8v22H7z" /><circle pathLength="1" cx="24" cy="26" r="7" /></svg>
+        <p class="label">Фото</p>
+        <h2>Общий альбом</h2>
+        <p class="lead">Все снимки и&nbsp;видео складываем в&nbsp;группу в&nbsp;MAX — чтобы ни&nbsp;один кадр не&nbsp;потерялся.</p>
+        <a class="text-btn" id="max-link" href="#" hidden>Открыть группу в MAX</a>
+      </section>
+
+      <footer class="finale">
+        <img src="photos/podrugi.jpg" alt="" loading="lazy" />
+        <div class="finale-copy reveal">
+          <p class="finale-line">До встречи, девочки!</p>
+          <p class="finale-name">Дарина</p>
+          <p class="finale-date">26 июня 2027 · Якутск</p>
+          <p class="credit">Демо-работа · Фото: Pexels · Музыка: Kevin MacLeod — «Bossa Antigua» (CC BY 4.0)</p>
+        </div>
+      </footer>
+    </main>
+
+    <audio id="music" loop preload="auto" src="audio/music.mp3"></audio>
+    <button type="button" class="sound" id="sound" hidden aria-pressed="true" aria-label="Выключить музыку">
+      <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    </button>
+
+    <script src="config.js?v=1"></script>
+    <script src="script.js?v=1"></script>
+  </body>
+</html>
