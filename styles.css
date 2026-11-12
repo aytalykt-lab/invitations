@@ -496,6 +496,32 @@ h2 {
   transform: none;
 }
 
+/* Главная работа — чуть крупнее и с подписью-лентой */
+.work-main .phone {
+  width: min(74vw, 300px);
+  position: relative;
+}
+
+.work-main .work-copy::before {
+  content: "Главная работа";
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 14px 4px;
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff8ee;
+  background: var(--accent-deep);
+  border-radius: 999px;
+}
+
+@media (min-width: 860px) {
+  .work-main .phone {
+    width: 320px;
+  }
+}
+
 /* ---------- Что внутри ---------- */
 
 .inside {
