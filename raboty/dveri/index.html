@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Юбилей Виктора Андреевича — 18 сентября 2027</title>
-    <meta name="description" content="Приглашение на торжественный вечер. Демо-работа: имя, дата и место вымышлены." />
-    <meta name="theme-color" content="#08241c" />
+    <meta name="description" content="Приглашение на юбилей. Демо-работа: имя, дата и место вымышлены." />
+    <meta name="theme-color" content="#071d16" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
-    <meta property="og:title" content="Двери в зал — приглашение на юбилей" />
-    <meta property="og:description" content="Демо-работа. Возьмитесь за кольцо — двери распахнутся и заиграет музыка." />
+    <meta property="og:title" content="Изумрудный вечер — приглашение на юбилей" />
+    <meta property="og:description" content="Демо-работа. Нажмите на печать — конверт откроется и заиграет музыка." />
     <meta property="og:image" content="https://aytalykt-lab.github.io/invitations/og/og-dveri.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -18,139 +18,111 @@
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Forum&family=Great+Vibes&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css?v=5" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Forum&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=env1" />
   </head>
   <body class="is-locked">
-    <!-- Вход: двери в зал -->
-    <div class="gate" id="gate">
-      <div class="gate-light" aria-hidden="true"></div>
-      <div class="door door-left" aria-hidden="true">
-        <span class="panel"></span>
-        <span class="panel panel-low"></span>
-        <span class="handle"></span>
+    <!-- Обложка: фото, на нём конверт с сургучной печатью -->
+    <div class="cover" id="cover">
+      <img class="cover-bg" src="photos/bal.jpg" alt="" />
+      <div class="cover-veil" aria-hidden="true"></div>
+      <div class="cover-copy">
+        <p class="cover-kicker">Приглашение</p>
+        <p class="cover-title">на юбилей</p>
       </div>
-      <div class="door door-right" aria-hidden="true">
-        <span class="panel"></span>
-        <span class="panel panel-low"></span>
-        <span class="handle"></span>
-      </div>
-      <div class="gate-copy">
-        <p class="gate-kicker">Приглашение</p>
-        <p class="gate-title">на торжество</p>
-        <button type="button" class="knocker" id="open" aria-label="Открыть двери">
-          <span class="knocker-plate"></span>
-          <span class="knocker-ring"></span>
+      <div class="env">
+        <div class="env-back" aria-hidden="true"></div>
+        <div class="env-letter" aria-hidden="true">
+          <p class="l1">Виктор Андреевич</p>
+          <p class="l2">60 лет · 18.09.2027</p>
+        </div>
+        <div class="env-front" aria-hidden="true"></div>
+        <div class="env-flap" aria-hidden="true"></div>
+        <button type="button" class="seal" id="open" aria-label="Открыть приглашение">
+          <span class="seal-mono">ВА</span>
+          <span class="seal-text">Открой<br />меня</span>
         </button>
-        <p class="gate-hint">Нажмите на кольцо — двери откроются<br />и зазвучит музыка</p>
       </div>
+      <p class="cover-hint">Нажмите на печать — зазвучит музыка</p>
     </div>
 
-    <canvas class="burst" id="burst" aria-hidden="true"></canvas>
-
-    <main class="hall">
-      <!-- Главный экран -->
+    <main class="letter">
       <header class="hero">
-        <canvas class="dust" id="dust" aria-hidden="true"></canvas>
-        <p class="hero-label">Торжественный вечер</p>
-        <div class="crest">
-          <svg viewBox="0 0 200 200" aria-hidden="true">
-            <circle class="draw" cx="100" cy="100" r="92" pathLength="1" />
-            <circle class="draw draw-2" cx="100" cy="100" r="82" pathLength="1" />
-            <path class="draw draw-3" pathLength="1" d="M100 4 L106 14 L100 24 L94 14 Z M100 176 L106 186 L100 196 L94 186 Z M4 100 L14 94 L24 100 L14 106 Z M176 100 L186 94 L196 100 L186 106 Z" />
-          </svg>
-          <span class="crest-num">60</span>
-          <span class="crest-word">лет</span>
+        <img src="photos/portret.jpg" alt="Виктор Андреевич" />
+        <div class="hero-veil" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="kicker">18 сентября 2027 · 18:00 · Якутск</p>
+          <h1>Виктор Андреевич</h1>
+          <p class="scroll-hint">листайте вниз</p>
         </div>
-        <h1 class="hero-name">
-          <span class="split">Виктор</span>
-          <span class="split" data-delay="0.5">Андреевич</span>
-        </h1>
-        <p class="hero-sub">приглашает вас на юбилей</p>
-        <p class="hero-date">18 сентября 2027 · суббота · 18:00</p>
-        <p class="scroll-cue" aria-hidden="true">листайте вниз</p>
       </header>
 
-      <!-- Обращение -->
-      <section class="page reveal">
-        <svg class="sprig sprig-tr" viewBox="0 0 124 160" aria-hidden="true"><path class="stem" d="M10 152C40 112 70 72 112 8" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(25 129) rotate(-12) scale(1.0)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(40 108) rotate(-98) scale(0.93)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(55 87) rotate(-12) scale(0.86)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(70 66) rotate(-98) scale(0.79)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(85 45) rotate(-12) scale(0.72)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(100 24) rotate(-98) scale(0.65)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(112 8) rotate(-55) scale(.6)" /></svg>
-        <svg class="sprig sprig-bl" viewBox="0 0 124 160" aria-hidden="true"><path class="stem" d="M10 152C40 112 70 72 112 8" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(25 129) rotate(-12) scale(1.0)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(40 108) rotate(-98) scale(0.93)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(55 87) rotate(-12) scale(0.86)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(70 66) rotate(-98) scale(0.79)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(85 45) rotate(-12) scale(0.72)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(100 24) rotate(-98) scale(0.65)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(112 8) rotate(-55) scale(.6)" /></svg>
+      <section class="block reveal">
         <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M6 12h36v24H6z M6 13l18 13 18-13" /></svg>
-        <p class="label">Обращение</p>
-        <h2>Дорогие родные и&nbsp;друзья!</h2>
+        <p class="script-head">Дорогие родные и друзья</p>
         <p class="lead">
           Шестьдесят лет — хороший повод собрать за&nbsp;одним столом всех, кто мне дорог.
           Буду искренне рад видеть вас на&nbsp;этом вечере.
         </p>
-        <div class="flourish" aria-hidden="true">
-          <svg viewBox="0 0 160 20"><path pathLength="1" d="M2 10 H58 M102 10 H158 M66 10 C72 2 88 2 94 10 C88 18 72 18 66 10 Z" /></svg>
-        </div>
+        <p class="sign">Виктор Андреевич</p>
       </section>
 
-      <!-- Дата -->
-      <section class="page page-tint reveal">
-        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M8 12h32v28H8z M8 20h32 M16 8v8 M32 8v8" /><path pathLength="1" d="M24 25l1.8 4 4.2 0.5-3 3 0.8 4.2-3.8-2-3.8 2 0.8-4.2-3-3 4.2-0.5z" /></svg>
-        <p class="label">Дата</p>
-        <h2>Сентябрь 2027</h2>
-        <div class="cal" id="cal" role="img" aria-label="Календарь: сентябрь 2027, торжество в субботу 18-го"></div>
-        <p class="until">До торжества осталось</p>
+      <figure class="plate reveal"><img src="photos/portret-kofe.jpg" alt="Виктор Андреевич с чашкой кофе" loading="lazy" decoding="async" /></figure>
+
+      <section class="block reveal">
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M8 12h32v28H8z M8 20h32 M16 8v8 M32 8v8" /><path pathLength="1" d="M24 36c-5-3.5-7-6-7-8.5a3.5 3.5 0 0 1 7-1 3.5 3.5 0 0 1 7 1c0 2.5-2 5-7 8.5z" /></svg>
+        <p class="script-head">Дата</p>
+        <p class="cal-month">сентябрь 2027</p>
+        <div class="cal" id="cal" role="img" aria-label="Календарь: сентябрь 2027, юбилей в субботу 18-го"></div>
+        <p class="when">Суббота, 18 сентября · начало в 18:00</p>
         <div class="countdown" id="countdown" aria-live="off"></div>
       </section>
 
-      <!-- Программа -->
-      <section class="page page-dark reveal">
-        <p class="label">Программа вечера</p>
-        <h2>Как пройдёт торжество</h2>
-        <ol class="timeline">
+      <figure class="plate plate-tall reveal"><img src="photos/zal-2.jpg" alt="Праздничный зал с люстрами" loading="lazy" decoding="async" /></figure>
+
+      <section class="block block-dark reveal">
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M13 8h22v32H13z M18 16h12 M18 22h12 M18 28h8 M18 34h10" /></svg>
+        <p class="script-head">Программа</p>
+        <ol class="program">
           <li>
-            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M13 8h11l-1 12a4.5 4.5 0 0 1-9 0z M18.5 24.5v12 M13 38h11" /><path pathLength="1" d="M30 11l9 3-4 11.5a4.5 4.5 0 0 1-8.5-3z M30.5 28l-3 9 M23 35.5l9 3" /><path pathLength="1" d="M27 5v3 M31 6l-1.5 2.5 M23 6l1.5 2.5" /></svg>
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M13 8h11l-1 12a4.5 4.5 0 0 1-9 0z M18.5 24.5v12 M13 38h11" /><path pathLength="1" d="M30 11l9 3-4 11.5a4.5 4.5 0 0 1-8.5-3z M30.5 28l-3 9 M23 35.5l9 3" /></svg>
             <time>18:00</time>
-            <strong>Сбор гостей</strong>
-            <p>Приветственный бокал и живая музыка в&nbsp;фойе</p>
+            <div><strong>Сбор гостей</strong><p>Приветственный бокал и живая музыка</p></div>
           </li>
           <li>
             <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><rect pathLength="1" x="19" y="6" width="10" height="18" rx="5" /><path pathLength="1" d="M13 20a11 11 0 0 0 22 0 M24 31v9 M17 40h14" /></svg>
             <time>18:30</time>
-            <strong>Торжественная часть</strong>
-            <p>Слово юбиляра и первые поздравления</p>
+            <div><strong>Торжественная часть</strong><p>Слово юбиляра и первые поздравления</p></div>
           </li>
           <li>
             <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M6 34h36 M10 34a14 14 0 0 1 28 0 M24 20v-3 M21 15.5h6 M9 39h30" /></svg>
             <time>19:00</time>
-            <strong>Банкет</strong>
-            <p>Праздничный ужин</p>
+            <div><strong>Банкет</strong><p>Праздничный ужин</p></div>
           </li>
           <li>
             <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M18 34V12l18-4v22" /><circle pathLength="1" cx="14" cy="34" r="4" /><circle pathLength="1" cx="32" cy="30" r="4" /></svg>
             <time>20:30</time>
-            <strong>Музыка и танцы</strong>
-            <p>Выступление артистов, танцевальная программа</p>
+            <div><strong>Музыка и танцы</strong><p>Артисты и танцевальная программа</p></div>
           </li>
           <li>
             <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M9 40h30 M12 40V28h24v12 M16 28v-8h16v8 M24 20v-6 M12 34c3 2 5-2 8 0s5-2 8 0 5-2 8 0" /><path pathLength="1" d="M24 8c-2 2.5-2 5 0 5s2-2.5 0-5z" /></svg>
             <time>22:00</time>
-            <strong>Праздничный торт</strong>
-            <p>Общий снимок на память</p>
+            <div><strong>Праздничный торт</strong><p>И общий снимок на память</p></div>
           </li>
           <li>
-            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 7l3 9.5 9.5 3-9.5 3-3 9.5-3-9.5-9.5-3 9.5-3z" /><path pathLength="1" d="M38 30l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z" /><path pathLength="1" d="M10 31l1 3 3 1-3 1-1 3-1-3-3-1 3-1z" /></svg>
+            <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 7l3 9.5 9.5 3-9.5 3-3 9.5-3-9.5-9.5-3 9.5-3z" /><path pathLength="1" d="M38 30l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z" /></svg>
             <time>23:00</time>
-            <strong>Завершение вечера</strong>
-            <p>Круг пожеланий</p>
+            <div><strong>Завершение</strong><p>Круг пожеланий</p></div>
           </li>
         </ol>
       </section>
 
-      <!-- Место -->
-      <section class="page reveal">
+      <section class="block reveal">
         <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 43c-8-10-12-16-12-22a12 12 0 0 1 24 0c0 6-4 12-12 22z" /><circle pathLength="1" cx="24" cy="21" r="4" /></svg>
-        <p class="label">Место</p>
-        <h2>Банкетный зал «Изумруд»</h2>
-        <figure class="venue"><img src="photos/zal.jpg" alt="Банкетный зал с хрустальными люстрами" loading="lazy" /></figure>
-        <p class="lead">Якутск, парадный вход.<br />Для гостей есть парковка и гардероб.</p>
+        <p class="script-head">Место</p>
+        <p class="place">Банкетный зал «Изумруд»</p>
+        <p class="addr">Якутск, парадный вход. Парковка и гардероб</p>
+        <figure class="venue"><img src="photos/zal.jpg" alt="Банкетный зал с хрустальными люстрами" loading="lazy" decoding="async" /></figure>
         <div class="map">
           <iframe
             title="Карта Якутска"
@@ -159,88 +131,62 @@
             allowfullscreen
           ></iframe>
         </div>
-        <p class="note">В демо на карте показан центр города. В вашем приглашении будет точка зала и маршрут в 2ГИС.</p>
+        <p class="note">В демо на карте центр города. В вашем приглашении будет точка места и маршрут в 2ГИС.</p>
       </section>
 
-      <!-- Дресс-код -->
-      <section class="page page-tint reveal">
-        <svg class="sprig sprig-tl" viewBox="0 0 124 160" aria-hidden="true"><path class="stem" d="M10 152C40 112 70 72 112 8" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(25 129) rotate(-12) scale(1.0)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(40 108) rotate(-98) scale(0.93)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(55 87) rotate(-12) scale(0.86)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(70 66) rotate(-98) scale(0.79)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(85 45) rotate(-12) scale(0.72)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(100 24) rotate(-98) scale(0.65)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(112 8) rotate(-55) scale(.6)" /></svg>
+      <section class="block block-tint reveal">
         <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 24L8 14v20z M24 24l16-10v20z" /><circle pathLength="1" cx="24" cy="24" r="3" /></svg>
-        <p class="label">Дресс-код</p>
-        <h2>Вечерний</h2>
-        <p class="lead">
-          Костюмы и вечерние платья. Будем признательны, если вы поддержите цвета вечера.
-        </p>
-        <div class="swatches" aria-hidden="true">
-          <span style="--c: #0f3b2e"><i>изумруд</i></span>
-          <span style="--c: #c8a45c"><i>золото</i></span>
-          <span style="--c: #f3ead6"><i>слоновая кость</i></span>
-          <span style="--c: #16201c"><i>чёрный</i></span>
-        </div>
+        <p class="script-head">Дресс-код</p>
+        <p class="lead">Костюмы и вечерние платья. Будем рады, если вы поддержите цвета вечера: изумруд, золото и&nbsp;слоновую кость.</p>
+        <div class="swatches" aria-hidden="true"><span style="--c: #0f3b2e"></span><span style="--c: #2f5d4c"></span><span style="--c: #c8a45c"></span><span style="--c: #efe3c4"></span><span style="--c: #1c211e"></span></div>
       </section>
 
-      <!-- Пожелания -->
-      <section class="page reveal">
-        <svg class="sprig sprig-br" viewBox="0 0 124 160" aria-hidden="true"><path class="stem" d="M10 152C40 112 70 72 112 8" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(25 129) rotate(-12) scale(1.0)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(40 108) rotate(-98) scale(0.93)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(55 87) rotate(-12) scale(0.86)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(70 66) rotate(-98) scale(0.79)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(85 45) rotate(-12) scale(0.72)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(100 24) rotate(-98) scale(0.65)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(112 8) rotate(-55) scale(.6)" /></svg>
+      <section class="block reveal">
         <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M8 20h32v8H8z M11 28v13h26V28 M24 20v21" /><path pathLength="1" d="M24 20c-6 0-10-3-9-7s8-2 9 7c1-9 8-11 9-7s-3 7-9 7z" /></svg>
-        <p class="label">Пожелания</p>
-        <h2>О подарках</h2>
-        <p class="lead">
-          Лучший подарок — ваше присутствие и тёплые слова. Если захотите дополнить их,
-          юбиляр будет рад конверту вместо цветов.
-        </p>
-        <div class="flourish" aria-hidden="true">
-          <svg viewBox="0 0 160 20"><path pathLength="1" d="M2 10 H58 M102 10 H158 M66 10 C72 2 88 2 94 10 C88 18 72 18 66 10 Z" /></svg>
-        </div>
+        <p class="script-head">Пожелания</p>
+        <p class="lead">Лучший подарок — ваше присутствие и&nbsp;тёплые слова. Если захотите дополнить их, вместо цветов буду рад конверту.</p>
       </section>
 
-      <!-- Анкета -->
-      <section class="page page-dark reveal" id="rsvp">
-        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M13 8h22v32H13z M18 16h12 M18 22h12 M18 28h8 M18 34h10" /></svg>
-        <p class="label">Анкета гостя</p>
-        <h2>Вы будете с&nbsp;нами?</h2>
+      <section class="block block-dark reveal" id="rsvp">
+        <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M10 8h28v32H10z M15 17l3 3 5-6 M27 18h7 M15 28l3 3 5-6 M27 29h7" /></svg>
+        <p class="script-head">Анкета гостя</p>
         <p class="lead">Пожалуйста, подтвердите присутствие до&nbsp;1&nbsp;сентября.</p>
         <label class="field">
           <span>Имя и фамилия</span>
           <input id="guest" type="text" autocomplete="name" placeholder="Мария Иванова" />
         </label>
         <div class="answers">
-          <button type="button" class="btn" data-answer="yes"><span>С радостью приду</span></button>
-          <button type="button" class="btn btn-ghost" data-answer="no"><span>К сожалению, не смогу</span></button>
+          <button type="button" class="btn" data-answer="yes">С радостью приду</button>
+          <button type="button" class="btn btn-ghost" data-answer="no">Не смогу</button>
         </div>
         <p class="hint" id="hint" role="status" hidden></p>
       </section>
 
-      <!-- Фото -->
-      <section class="page reveal">
-        <svg class="sprig sprig-tr" viewBox="0 0 124 160" aria-hidden="true"><path class="stem" d="M10 152C40 112 70 72 112 8" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(25 129) rotate(-12) scale(1.0)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(40 108) rotate(-98) scale(0.93)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(55 87) rotate(-12) scale(0.86)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(70 66) rotate(-98) scale(0.79)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(85 45) rotate(-12) scale(0.72)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(100 24) rotate(-98) scale(0.65)" /><path d="M0 0C6-8 18-8 24 0C18 8 6 8 0 0Z" transform="translate(112 8) rotate(-55) scale(.6)" /></svg>
+      <section class="block reveal">
         <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M7 16h8l3-4h12l3 4h8v22H7z" /><circle pathLength="1" cx="24" cy="26" r="7" /></svg>
-        <p class="label">Фотографии</p>
-        <h2>Общий альбом</h2>
-        <p class="lead">
-          Снимки с&nbsp;вечера соберём в&nbsp;группе в&nbsp;MAX, чтобы у&nbsp;каждого остались кадры на&nbsp;память.
-        </p>
+        <p class="script-head">Фото</p>
+        <p class="lead">Снимки с&nbsp;вечера соберём в&nbsp;группе в&nbsp;MAX, чтобы у&nbsp;каждого остались кадры на&nbsp;память.</p>
         <a class="text-btn" id="max-link" href="#" hidden>Открыть группу в MAX</a>
       </section>
 
-      <!-- Финал -->
-      <footer class="finale reveal">
-        <p class="label">До встречи</p>
-        <p class="finale-line">С уважением и теплом,</p>
-        <p class="finale-name">Виктор Андреевич</p>
-        <p class="finale-date">18 сентября 2027 · Якутск</p>
-        <p class="credit">
-          Демо-работа · Фото: Pexels · Музыка: И. Пахельбель, «Канон ре мажор», исп. Kevin MacLeod (CC BY 4.0)
-        </p>
+      <footer class="close">
+        <img src="photos/bokal.jpg" alt="" loading="lazy" decoding="async" class="close-photo" />
+        <div class="close-copy reveal">
+          <p class="close-hello">С уважением и теплом,</p>
+          <p class="close-names">Виктор Андреевич</p>
+          <p class="close-meta">60 лет · 18 сентября 2027 · Якутск</p>
+          <p class="credit">Демо-работа · Фото: Pexels · Музыка: И. Пахельбель, «Канон ре мажор», исп. Kevin MacLeod (CC BY 4.0)</p>
+        </div>
       </footer>
     </main>
 
     <audio id="music" loop preload="none" src="audio/music.mp3"></audio>
-    <button type="button" class="sound" id="sound" hidden aria-pressed="true" aria-label="Выключить музыку">
-      <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <button type="button" class="music-btn" id="sound" hidden aria-pressed="true" aria-label="Выключить музыку">
+      <span aria-hidden="true">♪</span>
+      музыка
     </button>
 
-    <script src="config.js?v=1"></script>
-    <script src="script.js?v=1"></script>
+    <script src="config.js?v=env1"></script>
+    <script src="script.js?v=env1"></script>
   </body>
 </html>

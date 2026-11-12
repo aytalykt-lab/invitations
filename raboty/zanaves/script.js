@@ -1,13 +1,13 @@
 const cfg = window.INVITE || {};
 const startsAt = new Date(cfg.startsAt || "2027-07-10T16:00:00+09:00");
 
-const curtain = document.getElementById("curtain");
+const cover = document.getElementById("cover");
 const openBtn = document.getElementById("open");
 const music = document.getElementById("music");
 const soundBtn = document.getElementById("sound");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ---------- Занавес и музыка ---------- */
+/* ---------- Обложка и музыка ---------- */
 
 function setSound(playing) {
   soundBtn.hidden = false;
@@ -27,15 +27,15 @@ function playMusic() {
 }
 
 openBtn.addEventListener("click", () => {
-  if (curtain.classList.contains("is-open")) return;
+  if (cover.classList.contains("is-open")) return;
   playMusic();
-  curtain.classList.add("is-open");
+  cover.classList.add("is-open");
   document.body.classList.remove("is-locked");
   document.body.classList.add("is-live");
   window.scrollTo(0, 0);
   window.setTimeout(() => {
-    curtain.hidden = true;
-  }, reduceMotion ? 300 : 2600);
+    cover.hidden = true;
+  }, reduceMotion ? 300 : 2200);
 });
 
 soundBtn.addEventListener("click", () => {
@@ -47,7 +47,7 @@ soundBtn.addEventListener("click", () => {
   }
 });
 
-// Музыка не должна играть, когда гость свернул страницу.
+// Музыка не играет, пока гость свернул страницу.
 let pausedByTab = false;
 document.addEventListener("visibilitychange", () => {
   if (document.hidden && !music.paused) {
@@ -64,7 +64,6 @@ document.addEventListener("visibilitychange", () => {
 function buildCalendar() {
   const el = document.getElementById("cal");
   if (!el) return;
-  // День и месяц считаем по времени Якутска, а не по часам гостя.
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone: "Asia/Yakutsk",
     year: "numeric",
@@ -75,9 +74,8 @@ function buildCalendar() {
   const year = get("year");
   const month = get("month");
   const day = get("day");
-
-  const first = new Date(Date.UTC(year, month - 1, 1)).getUTCDay(); // 0 = вс
-  const offset = (first + 6) % 7; // понедельник — первый
+  const first = new Date(Date.UTC(year, month - 1, 1)).getUTCDay();
+  const offset = (first + 6) % 7;
   const total = new Date(Date.UTC(year, month, 0)).getUTCDate();
 
   const frag = document.createDocumentFragment();
@@ -97,7 +95,7 @@ function buildCalendar() {
   el.appendChild(frag);
 }
 
-/* ---------- Таймер ---------- */
+/* ---------- Таймер: клетки создаются один раз ---------- */
 
 function plural(n, forms) {
   const a = Math.abs(n) % 100;
@@ -108,33 +106,44 @@ function plural(n, forms) {
   return forms[2];
 }
 
+const UNITS = [
+  ["день", "дня", "дней"],
+  ["час", "часа", "часов"],
+  ["минута", "минуты", "минут"],
+  ["секунда", "секунды", "секунд"],
+];
+let cells = null;
+
 function tick() {
   const el = document.getElementById("countdown");
   if (!el) return;
   const diff = startsAt.getTime() - Date.now();
   if (diff <= 0) {
-    el.textContent = "Занавес поднят — праздник начался";
-    el.classList.add("is-over");
+    if (!el.classList.contains("is-over")) {
+      el.classList.add("is-over");
+      el.textContent = "Этот день наступил";
+    }
     return;
   }
   const s = Math.floor(diff / 1000);
-  const units = [
-    [Math.floor(s / 86400), ["день", "дня", "дней"]],
-    [Math.floor((s % 86400) / 3600), ["час", "часа", "часов"]],
-    [Math.floor((s % 3600) / 60), ["минута", "минуты", "минут"]],
-    [s % 60, ["секунда", "секунды", "секунд"]],
-  ];
-  el.replaceChildren(
-    ...units.map(([value, forms]) => {
+  const values = [Math.floor(s / 86400), Math.floor((s % 86400) / 3600), Math.floor((s % 3600) / 60), s % 60];
+  if (!cells) {
+    cells = values.map(() => {
       const cell = document.createElement("div");
       const num = document.createElement("b");
-      num.textContent = String(value).padStart(2, "0");
       const cap = document.createElement("span");
-      cap.textContent = plural(value, forms);
       cell.append(num, cap);
-      return cell;
-    })
-  );
+      el.appendChild(cell);
+      return { num, cap, last: null };
+    });
+  }
+  values.forEach((value, i) => {
+    const c = cells[i];
+    if (c.last === value) return;
+    c.last = value;
+    c.num.textContent = String(value).padStart(2, "0");
+    c.cap.textContent = plural(value, UNITS[i]);
+  });
 }
 
 /* ---------- Анкета гостя ---------- */
@@ -152,7 +161,7 @@ document.querySelectorAll("[data-answer]").forEach((btn) => {
   btn.addEventListener("click", () => {
     const name = guest.value.trim();
     if (name.length < 3) {
-      showHint("Напишите имя и фамилию, чтобы мы знали, чьё это место.", true);
+      showHint("Пожалуйста, напишите имя и фамилию.", true);
       guest.focus();
       return;
     }
@@ -166,11 +175,7 @@ document.querySelectorAll("[data-answer]").forEach((btn) => {
         body: JSON.stringify({ name, answer, at: new Date().toISOString() }),
       }).catch(() => {});
     }
-    showHint(
-      answer === "yes"
-        ? "Место за вами. До встречи в зале!"
-        : "Жаль, что не получится. Спасибо, что предупредили."
-    );
+    showHint(answer === "yes" ? "Спасибо! Мы записали вас в список гостей." : "Спасибо, что предупредили. Будем скучать.");
   });
 });
 
@@ -185,7 +190,7 @@ if (maxLink && maxHref.startsWith("http")) {
   maxLink.hidden = false;
 }
 
-/* ---------- Появление блоков при прокрутке ---------- */
+/* ---------- Появление блоков: только через IntersectionObserver ---------- */
 
 const revealItems = document.querySelectorAll(".reveal");
 if (reduceMotion || !("IntersectionObserver" in window)) {
@@ -200,7 +205,7 @@ if (reduceMotion || !("IntersectionObserver" in window)) {
         }
       });
     },
-    { threshold: 0.18 }
+    { threshold: 0.14 }
   );
   revealItems.forEach((el) => io.observe(el));
 }
