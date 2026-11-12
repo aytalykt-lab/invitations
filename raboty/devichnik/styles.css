@@ -1,4 +1,4 @@
-/* Девичник «Игристое»: фото на весь экран, как в работе «Кристина и Айдыс», вход — конверт с печатью. Пыльная роза и шампань. */
+/* Девичник «Игристое»: фото на весь экран, как в работе «Кристина и Айдыс». Вход — старинный конверт на весь экран. Пыльная роза и шампань. */
 
 :root {
   --paper: #fbf3f0;
@@ -81,20 +81,23 @@ input {
   outline-offset: 4px;
 }
 
-/* ---------- Обложка: фото + конверт с сургучной печатью ---------- */
+/* ---------- Обложка: старинный конверт на весь экран ----------
+   Весь экран — это конверт: бумага с фактурой, сгибы, клапан с надписью,
+   фото в арочном окне и сургучная печать. Отдельного фона нет. */
 
 .cover {
+  --paper-env: #f3e2dc;
+  --paper-env-2: #ead2cb;
+  --paper-env-3: #e2c4bd;
+  --foil: #b98c56;
+  --foil-lit: #e3c48f;
+
   position: fixed;
   inset: 0;
   z-index: 50;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: max(24px, env(safe-area-inset-top)) var(--pad) max(64px, env(safe-area-inset-bottom));
-  text-align: center;
-  color: #fbf4ea;
+  perspective: 1400px;
+  background: var(--paper-env-2);
   transition: opacity 1.1s ease, transform 1.4s var(--ease);
 }
 
@@ -102,183 +105,216 @@ input {
   display: none;
 }
 
-.cover-bg {
+/* Бумажная фактура поверх всех частей конверта */
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.45  0 0 0 0 0.3  0 0 0 0 0.28  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Внутренняя сторона с подкладкой — видна, когда клапан откинут */
+.env-inside {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(185, 140, 86, 0.35) 0 1.2px, transparent 1.6px) 0 0 / 14px 14px,
+    radial-gradient(circle at 50% 50%, rgba(185, 140, 86, 0.2) 0 1px, transparent 1.4px) 7px 7px / 14px 14px,
+    linear-gradient(180deg, #7a2a40, #4a1424);
+}
+
+/* Фото в арочном окне: при открытии выезжает и раскрывается */
+.env-photo {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 47svh;
+  width: min(60vw, 250px);
+  height: min(36svh, 320px);
+  margin: 0 0 0 calc(min(60vw, 250px) / -2);
+  padding: 7px;
+  border-radius: 999px 999px 6px 6px;
+  background: linear-gradient(160deg, var(--foil-lit), var(--foil) 55%, #8f6a3c);
+  box-shadow:
+    0 0 0 1px rgba(120, 80, 40, 0.35),
+    0 14px 30px rgba(90, 30, 45, 0.28);
+  transition: transform 1.2s var(--ease) 0.9s;
+}
+
+.env-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-radius: 999px 999px 3px 3px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+/* Карман конверта с боковыми и нижним клапанами */
+.env-pocket {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  /* сверху вырез треугольником: когда клапан откинут, видна подкладка внутри */
+  clip-path: polygon(0 0, 50% 42%, 100% 0, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, var(--paper-env), var(--paper-env-2));
+}
+
+/* Тонкая золотая рамка тиснением по краю */
+.env-pocket::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  z-index: 1;
+  border: 1px solid var(--foil);
+  box-shadow: inset 0 0 0 3px var(--paper-env), inset 0 0 0 4px rgba(185, 140, 86, 0.55);
+  opacity: 0.75;
+}
+
+.env-folds {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: var(--cover-pos, 50% 40%);
-  transform: scale(1.06);
 }
 
-.cover-veil {
+.fold-side {
+  fill: rgba(140, 70, 80, 0.05);
+}
+
+.fold-bottom {
+  fill: rgba(255, 255, 255, 0.28);
+}
+
+.fold-line {
+  fill: none;
+  stroke: rgba(140, 80, 80, 0.28);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.env-date {
   position: absolute;
-  inset: 0;
-  background: var(--cover-veil);
-}
-
-.cover-copy,
-.env,
-.cover-hint {
-  position: relative;
-}
-
-.cover-kicker {
+  z-index: 5;
+  left: 0;
+  right: 0;
+  top: calc(47svh + min(36svh, 320px) + 18px);
+  text-align: center;
   font-family: var(--caps);
-  font-size: 13px;
-  letter-spacing: 0.38em;
-  text-indent: 0.38em;
+  font-size: 12px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  opacity: 0.92;
+  color: #8a5a5f;
+  transition: opacity 0.5s ease;
 }
 
-.cover-title {
-  margin-top: 2px;
-  font-family: var(--script);
-  font-size: clamp(54px, 16vw, 70px);
-  line-height: 1.1;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+/* Верхний клапан с надписью */
+.env-flap {
+  position: absolute;
+  z-index: 6;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 42svh;
+  transform-origin: 50% 0;
+  /* мягкая тень по краям клапана — он «лежит» на кармане */
+  filter: drop-shadow(0 6px 7px rgba(90, 40, 50, 0.2));
+  transition: transform 1.1s cubic-bezier(0.5, 0, 0.2, 1) 0.35s, z-index 0s linear 0.9s;
 }
 
-/* Конверт */
-.env {
-  margin-top: 26px;
-  width: min(82vw, 330px);
-  aspect-ratio: 3 / 2;
-  perspective: 1000px;
-}
-
-.env-back {
+.flap-face {
   position: absolute;
   inset: 0;
-  border-radius: 4px;
-  background: var(--env-dark);
-  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.5);
-}
-
-/* Письмо внутри: при открытии выезжает вверх */
-.env-letter {
-  position: absolute;
-  left: 7%;
-  right: 7%;
-  top: 7%;
-  bottom: 5%;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 9%;
-  color: var(--ink);
-  background:
-    radial-gradient(120% 90% at 50% 0, #fffdf8 0, rgba(255, 253, 248, 0) 70%),
-    #f8f1e5;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 6px 16px rgba(0, 0, 0, 0.15);
-  transition: transform 1.1s var(--ease) 0.95s;
-}
-
-.env-letter::before {
-  content: "";
-  position: absolute;
-  inset: 7px;
-  border: 1px solid var(--gold);
-  opacity: 0.55;
-}
-
-.env-letter .l1 {
-  font-family: var(--script);
-  font-size: 34px;
-  line-height: 1.1;
-  color: var(--wine);
-}
-
-.env-letter .l2 {
-  margin-top: 6px;
-  font-family: var(--caps);
-  font-size: 11px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-/* Передняя часть — «карман» с диагональными сгибами */
-.env-front {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  border-radius: 4px;
-  background: linear-gradient(170deg, var(--env-lit), var(--env) 70%);
-  clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
-}
-
-.env-front::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to top right, transparent calc(50% - 0.6px), var(--env-line) 50%, transparent calc(50% + 0.6px)) left bottom / 50% 100% no-repeat,
-    linear-gradient(to top left, transparent calc(50% - 0.6px), var(--env-line) 50%, transparent calc(50% + 0.6px)) right bottom / 50% 100% no-repeat;
-  opacity: 0.7;
-}
-
-/* Клапан: откидывается назад при открытии */
-.env-flap {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 60%;
-  z-index: 4;
-  transform-origin: 50% 0;
-  background: linear-gradient(180deg, var(--env-lit), var(--env-flap));
+  padding-top: max(9svh, calc(env(safe-area-inset-top) + 40px));
+  text-align: center;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transition: transform 0.9s var(--ease) 0.35s, z-index 0s linear 0.8s;
+  background: linear-gradient(180deg, #f7ebe6 0%, var(--paper-env) 60%, var(--paper-env-3) 100%);
+  backface-visibility: hidden;
 }
 
-/* Сургучная печать на стыке клапана */
-.seal {
+.flap-kicker {
+  font-family: var(--caps);
+  font-size: 12px;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  text-transform: uppercase;
+  color: #8a5a5f;
+}
+
+.flap-title {
+  margin-top: 2px;
+  font-family: var(--script);
+  font-size: clamp(56px, 17vw, 74px);
+  line-height: 1.05;
+  color: #8e2f45;
+  background: linear-gradient(180deg, #a23a55, #6e1e34);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Сургучная печать на острие клапана */
+.wax {
   position: absolute;
-  left: calc(50% - 46px);
-  top: calc(60% - 46px);
-  z-index: 5;
-  width: 92px;
-  height: 92px;
+  z-index: 8;
+  left: 50%;
+  top: 42svh;
+  width: 112px;
+  height: 112px;
+  margin: -56px 0 0 -56px;
   padding: 0;
   border: 0;
-  border-radius: 50%;
+  background: none;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  color: var(--seal-ink);
-  background:
-    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.35) 0, rgba(255, 255, 255, 0) 38%),
-    radial-gradient(circle, var(--seal-1) 0, var(--seal-2) 60%, var(--seal-3) 100%);
-  box-shadow:
-    inset 0 0 0 5px rgba(0, 0, 0, 0.1),
-    inset 0 0 0 6px rgba(255, 255, 255, 0.22),
-    0 10px 22px rgba(0, 0, 0, 0.4);
+  filter: drop-shadow(0 8px 10px rgba(80, 20, 35, 0.4));
   animation: pulse 3s ease-in-out infinite;
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-.seal-mono {
-  font-family: var(--script);
-  font-size: 32px;
-  line-height: 1;
+.wax svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
-.seal-text {
-  font-family: var(--caps);
-  font-size: 8px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  line-height: 1.35;
+.wax-blob {
+  fill: url(#wax-fill);
+}
+
+.wax-ring {
+  fill: none;
+  stroke: rgba(255, 220, 220, 0.28);
+  stroke-width: 1.6;
+}
+
+.wax-ring2 {
+  fill: rgba(70, 10, 25, 0.18);
+  stroke: rgba(40, 0, 10, 0.25);
+  stroke-width: 1;
+}
+
+.wax-leaves path {
+  fill: rgba(255, 220, 220, 0.2);
+}
+
+.wax text {
+  font-family: var(--script);
+  font-size: 46px;
+  fill: #f6d8cf;
+  opacity: 0.92;
+}
+
+.wax-shine {
+  fill: rgba(255, 255, 255, 0.28);
 }
 
 @keyframes pulse {
@@ -287,18 +323,20 @@ input {
     transform: scale(1);
   }
   66% {
-    transform: scale(1.08);
+    transform: scale(1.07);
   }
 }
 
 .cover-hint {
   position: absolute;
-  left: var(--pad);
-  right: var(--pad);
-  bottom: max(24px, env(safe-area-inset-bottom));
+  z-index: 8;
+  left: 0;
+  right: 0;
+  bottom: max(26px, env(safe-area-inset-bottom));
+  text-align: center;
   font-style: italic;
   font-size: 17px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  color: #8a5a5f;
   animation: bob 2s ease-in-out infinite alternate;
 }
 
@@ -308,23 +346,24 @@ input {
   }
 }
 
-/* Открытие: печать исчезает → клапан откидывается → письмо выезжает → обложка уходит */
-.cover.is-open .seal {
+/* Открытие: печать лопается → клапан откидывается → фото выезжает → конверт исчезает */
+.cover.is-open .wax {
   animation: none;
   opacity: 0;
-  transform: scale(1.5);
+  transform: scale(1.35) rotate(-12deg);
   pointer-events: none;
 }
 
 .cover.is-open .env-flap {
-  transform: rotateX(180deg);
-  z-index: 1;
+  transform: rotateX(-178deg);
+  z-index: 2;
 }
 
-.cover.is-open .env-letter {
-  transform: translateY(-62%);
+.cover.is-open .env-photo {
+  transform: translateY(-26svh) scale(1.12);
 }
 
+.cover.is-open .env-date,
 .cover.is-open .cover-hint {
   animation: none;
   opacity: 0;
@@ -337,12 +376,10 @@ input {
   pointer-events: none;
 }
 
-.cover-copy {
-  transition: opacity 0.5s ease 0.3s;
-}
-
-.cover.is-open .cover-copy {
-  opacity: 0;
+@media (max-height: 640px) {
+  .flap-title {
+    font-size: 50px;
+  }
 }
 
 /* ---------- Письмо ---------- */
