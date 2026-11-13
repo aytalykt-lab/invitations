@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Портфолио лендингов</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Layout: световой стол — узкая шапка с вилкой цен, фильтр по нишам, сетка «экран + телефон», внизу состав цены */
+:root {
+  --bg: #eef0f4; --surface: #ffffff; --ink: #14171f; --muted: #5d6475; --line: #d6dae3;
+  --accent: #2743e6; --on-accent: #ffffff; --chip: #e2e6ee; --frame: #0f1116;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e1016; --surface: #171a22; --ink: #eef0f6; --muted: #9aa1b2; --line: #2a2f3b;
+  --accent: #8497ff; --on-accent: #0b0d14; --chip: #222733; --frame: #05060a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0e1016; --surface: #171a22; --ink: #eef0f6; --muted: #9aa1b2; --line: #2a2f3b;
+  --accent: #8497ff; --on-accent: #0b0d14; --chip: #222733; --frame: #05060a; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1240px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, p { margin: 0; }
+h1, h2 { font-family: var(--display); font-weight: 700; line-height: 1.08; text-wrap: balance; letter-spacing: -.01em; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.head { padding-block: 56px 28px; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 32px; align-items: end; }
+.head h1 { font-size: clamp(30px, 5vw, 58px); }
+.head h1 span { color: var(--accent); }
+.head .lead { color: var(--muted); max-width: 52ch; margin-top: 18px; font-size: 17px; }
+.range { border-top: 2px solid var(--ink); padding-top: 14px; display: grid; gap: 4px; }
+.range small { color: var(--muted); font-size: 13px; }
+.range b { font: 700 clamp(22px, 2.6vw, 30px)/1.15 var(--mono); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; padding-block: 8px 28px; }
+.filters button { border: 0; cursor: pointer; background: var(--chip); color: var(--ink); font: 500 14px/1 var(--body); padding: 11px 16px; border-radius: 999px; display: inline-flex; gap: 8px; align-items: center; }
+.filters button i { font: 500 12px var(--mono); font-style: normal; color: var(--muted); }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.filters button[aria-pressed="true"] i { color: inherit; opacity: .7; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 44px 28px; }
+.work { display: grid; gap: 16px; align-content: start; min-width: 0; }
+.shot { position: relative; display: block; padding-right: 9%; padding-bottom: 7%; }
+.shot .desk { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 8px; background: var(--frame); box-shadow: 0 0 0 1px var(--line), 0 24px 40px -28px rgba(10, 14, 30, .55); }
+.shot .phone { position: absolute; right: 0; bottom: 0; width: 25%; aspect-ratio: 1 / 2; object-fit: cover; object-position: top; border-radius: 14px; border: 4px solid var(--frame); background: var(--frame); box-shadow: 0 18px 30px -16px rgba(10, 14, 30, .7); transition: transform .35s cubic-bezier(.2,.7,.1,1); }
+.shot:hover .phone { transform: translateY(-6px); }
+.meta { display: grid; gap: 6px; }
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.top h3 { font: 500 19px/1.2 var(--display); min-width: 0; }
+.price { font: 700 19px/1.2 var(--mono); white-space: nowrap; }
+.niche { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.feat { color: var(--muted); font-size: 15px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-top: 6px; }
+.row .term { font: 500 13px var(--mono); color: var(--muted); margin-right: auto; }
+.btn { border: 0; cursor: pointer; text-decoration: none; font: 600 14px/1 var(--body); padding: 12px 16px; border-radius: 8px; background: var(--accent); color: var(--on-accent); }
+.link { color: var(--ink); font-weight: 500; font-size: 14px; text-underline-offset: 4px; }
+
+.incl { margin-top: 72px; border-top: 2px solid var(--ink); padding-block: 28px 20px; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 28px 40px; }
+.incl h2 { font-size: clamp(22px, 2.8vw, 32px); }
+.incl ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.incl li { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.incl li span { min-width: 0; }
+.incl li b { font: 500 15px var(--mono); white-space: nowrap; }
+.incl h3 { font: 600 12px var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 26px 0 4px; }
+.incl h3:first-child { margin-top: 0; }
+footer { color: var(--muted); font-size: 13px; padding-block: 12px 96px; }
+
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); width: min(560px, calc(100vw - 32px)); background: var(--ink); color: var(--bg); padding: 14px 18px; border-radius: 12px; font-size: 14px; z-index: 20; box-shadow: 0 20px 40px -20px rgba(0,0,0,.6); }
+.toast b { display: block; font-weight: 600; }
+.toast span { display: block; opacity: .8; user-select: all; }
+
+@media (max-width: 760px) {
+  .head, .incl { grid-template-columns: 1fr; }
+  .head { padding-block: 36px 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .shot .phone { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="head">
+    <div>
+      <h1>Лендинги для&nbsp;малого бизнеса. <span>11&nbsp;примеров с&nbsp;ценами</span></h1>
+      <p class="lead">Каждый пример — рабочая страница с записью, прайсом и адаптацией под телефон. Откройте демо, выберите понравившийся и закажите такой же под свой бизнес.</p>
+    </div>
+    <div class="range">
+      <small>Цена за лендинг под ключ</small>
+      <b>18 000 – 35 000 ₽</b>
+      <small>Срок: от 4 до 8 рабочих дней</small>
+    </div>
+  </header>
+
+  <div class="filters" id="filters" role="group" aria-label="Ниша"></div>
+  <main class="grid" id="grid"></main>
+
+  <section class="incl">
+    <h2>Что входит в&nbsp;цену</h2>
+    <div>
+      <h3>В каждой работе</h3>
+      <ul>
+        <li><span>Дизайн под вашу нишу, без шаблона</span><b>входит</b></li>
+        <li><span>Версия для телефона и компьютера</span><b>входит</b></li>
+        <li><span>Форма записи или заявки</span><b>входит</b></li>
+        <li><span>Тексты и подбор фотографий</span><b>входит</b></li>
+        <li><span>Два круга правок</span><b>входит</b></li>
+      </ul>
+      <h3>Дополнительно</h3>
+      <ul>
+        <li><span>Заявки в Telegram или на почту</span><b>+2 000 ₽</b></li>
+        <li><span>Домен и размещение на год</span><b>+3 000 ₽</b></li>
+        <li><span>Калькулятор цены или подбор услуги</span><b>+5 000 ₽</b></li>
+        <li><span>Срочно, за 3 дня</span><b>+30 %</b></li>
+      </ul>
+    </div>
+  </section>
+  <footer>Названия, адреса и телефоны в примерах вымышлены: это концепты, а не сайты действующих компаний.</footer>
+</div>
+<div class="toast" id="toast" hidden role="status"><b>Заявка скопирована</b><span id="toastText"></span></div>
+
+<script>
+const WORKS = [
+  { id: "britva", name: "Бритва", niche: "Барбершоп", cat: "Красота", price: 30000, days: 7, url: "https://claude.ai/artifact/LrbheHy635y4JWuvtH4ioa", feat: "Услуги идут горизонтальной лентой, как киноплёнка: листаете вниз, а кадры едут вбок." },
+  { id: "kontur", name: "Контур", niche: "Загородные дома", cat: "Авто и дом", price: 35000, days: 8, url: "https://claude.ai/artifact/5MGJB6PNi9F3ygrxhmVdp4", feat: "Полноэкранные фото-главы, каталог проектов и расчёт стоимости дома." },
+  { id: "mindal", name: "Миндаль", niche: "Студия маникюра", cat: "Красота", price: 32000, days: 7, url: "https://claude.ai/artifact/NUMfqa7XADcGPtUCLrfe7T", feat: "Дизайны раскрываются веером. Клиент выбирает карточку, и она попадает в заявку." },
+  { id: "tishina", name: "Тишина", niche: "Массажный кабинет", cat: "Здоровье", price: 30000, days: 7, url: "https://claude.ai/artifact/Vk3PNtFK6yH7P9ijJ4s1T7", feat: "Страница идёт как сеанс на 60 минут: часы слева считают время, справа меняются этапы." },
+  { id: "vzglyad", name: "Взгляд", niche: "Брови и ресницы", cat: "Красота", price: 28000, days: 6, url: "https://claude.ai/artifact/Rp4rav1drgWZU3KaHws2UB", feat: "Фото вместо меню: точки на брови и ресницах открывают услуги и собирают запись." },
+  { id: "kaplya", name: "Капля", niche: "Косметология", cat: "Красота", price: 28000, days: 6, url: "https://claude.ai/artifact/EE56wMFrs7Vvzun38nPm8V", feat: "Процедуры по номерам и подбор ухода из трёх вопросов." },
+  { id: "garazh", name: "Гараж 47", niche: "Автосервис", cat: "Авто и дом", price: 25000, days: 5, url: "https://claude.ai/artifact/NvMBfBYFt3Jc44Um2rVhcs", feat: "Калькулятор работ на первом экране: отметили нужное и сразу видите цену и время." },
+  { id: "emal", name: "Клиника Эмаль", niche: "Стоматология", cat: "Здоровье", price: 25000, days: 5, url: "https://claude.ai/artifact/CTG6HnEkE5nf3hNPSi8h1F", feat: "Примерная смета лечения до визита и спокойный рассказ о первом приёме." },
+  { id: "obzharka", name: "Обжарка 214", niche: "Кофейня и ростерия", cat: "Кафе", price: 22000, days: 5, url: "https://claude.ai/artifact/4HritniJ98pQAxsoR3ktCT", feat: "Журнальный разворот: большие фото, график обжарки партии и бронь столика." },
+  { id: "zerkalo", name: "Зеркало №3", niche: "Салон красоты", cat: "Красота", price: 20000, days: 4, url: "https://claude.ai/artifact/9JaJHDrXTZjpNRFG182w5o", feat: "Услуги, мастера и таблица цен по длине волос собраны в одну плитку." },
+  { id: "profil", name: "Профиль без паники", niche: "Репетитор по математике", cat: "Обучение", price: 18000, days: 4, url: "https://claude.ai/artifact/5X6MZDCckmRgZEUdsbvMv4", feat: "Письмо от репетитора на школьной доске: программа, задача дня и счётчик недель до ЕГЭ." }
+];
+const rub = n => n.toLocaleString("ru-RU").replace(/ |\s/g, " ") + " ₽";
+const grid = document.getElementById("grid"), filters = document.getElementById("filters");
+const cats = ["Все", ...new Set(WORKS.map(w => w.cat))];
+let current = "Все";
+function draw() {
+  filters.innerHTML = cats.map(c => `<button type="button" aria-pressed="${c === current}" data-cat="${c}">${c} <i>${c === "Все" ? WORKS.length : WORKS.filter(w => w.cat === c).length}</i></button>`).join("");
+  grid.innerHTML = WORKS.filter(w => current === "Все" || w.cat === current).map(w => `
+    <article class="work">
+      <a class="shot" href="${w.url}" target="_blank" rel="noopener" aria-label="Открыть демо «${w.name}»">
+        <img class="desk" src="shots/${w.id}-d.jpg" alt="Первый экран лендинга «${w.name}» на компьютере" loading="lazy">
+        <img class="phone" src="shots/${w.id}-m.jpg" alt="«${w.name}» на телефоне" loading="lazy">
+      </a>
+      <div class="meta">
+        <span class="niche">${w.niche}</span>
+        <div class="top"><h3>${w.name}</h3><span class="price">${rub(w.price)}</span></div>
+        <p class="feat">${w.feat}</p>
+        <div class="row">
+          <span class="term">${w.days} раб. дней</span>
+          <a class="link" href="${w.url}" target="_blank" rel="noopener">Открыть демо</a>
+          <button class="btn" type="button" data-order="${w.id}">Хочу такой</button>
+        </div>
+      </div>
+    </article>`).join("");
+}
+draw();
+filters.addEventListener("click", e => { const b = e.target.closest("button"); if (b) { current = b.dataset.cat; draw(); } });
+const toast = document.getElementById("toast"), toastText = document.getElementById("toastText"); let timer;
+grid.addEventListener("click", e => {
+  const b = e.target.closest("[data-order]"); if (!b) return;
+  const w = WORKS.find(x => x.id === b.dataset.order);
+  const text = `Здравствуйте! Хочу лендинг как «${w.name}» (${w.niche.toLowerCase()}), ${rub(w.price)}.`;
+  toastText.textContent = text;
+  const show = ok => { toast.querySelector("b").textContent = ok ? "Заявка скопирована — вставьте её в сообщение" : "Скопируйте текст заявки"; toast.hidden = false; clearTimeout(timer); timer = setTimeout(() => toast.hidden = true, 7000); };
+  try { navigator.clipboard.writeText(text).then(() => show(true), () => show(false)); } catch (_) { show(false); }
+});
+</script>
+</body>
+</html>
