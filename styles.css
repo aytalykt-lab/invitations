@@ -1,15 +1,18 @@
-/* Портфолио приглашений и лендингов: тихая светлая витрина. Бумага, чернила, один акцент — бронза. */
+/* Портфолио приглашений и лендингов: тёмная сцена, стекло и золото. */
 
 :root {
-  --paper: #f5eee4;
-  --paper-deep: #ece2d3;
-  --card: #fbf7f0;
-  --ink: #2a211c;
-  --soft: #5d5048;
-  --muted: #8d7f74;
-  --accent: #a36a3c;
-  --accent-deep: #7c4d27;
-  --line: rgba(42, 33, 28, 0.14);
+  color-scheme: dark;
+  --paper: #100d0b;
+  --paper-deep: rgba(255, 255, 255, 0.035);
+  --card: rgba(255, 255, 255, 0.07);
+  --ink: #f6efe3;
+  --soft: rgba(246, 239, 227, 0.76);
+  --muted: rgba(246, 239, 227, 0.56);
+  --accent: #e3c078;
+  --accent-deep: #e3c078;
+  --gold-deep: #b98a3e;
+  --on-gold: #1d1408;
+  --line: rgba(255, 255, 255, 0.16);
 
   --script: "Great Vibes", "Snell Roundhand", cursive;
   --display: "Oranienbaum", "Times New Roman", serif;
@@ -1624,4 +1627,115 @@ h2 {
   .thumbs-row {
     scroll-behavior: auto;
   }
+}
+
+/* ---------- Вся страница: тёмная сцена ---------- */
+
+html {
+  background: var(--paper);
+}
+
+body {
+  position: relative;
+  background: none;
+}
+
+/* Общий фон: тёплое свечение, сетка и зерно. Стоит на месте, пока страница листается */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  background:
+    radial-gradient(46vmax 46vmax at 88% 4%, rgba(185, 138, 62, 0.34), transparent 70%),
+    radial-gradient(40vmax 40vmax at 4% 46%, rgba(126, 96, 214, 0.16), transparent 70%),
+    radial-gradient(44vmax 44vmax at 70% 100%, rgba(208, 104, 76, 0.16), transparent 70%),
+    radial-gradient(120% 80% at 50% 0, #1b1714 0, var(--paper) 70%);
+}
+
+body::after {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(100% 80% at 50% 20%, #000 0, transparent 80%);
+  mask-image: radial-gradient(100% 80% at 50% 20%, #000 0, transparent 80%);
+}
+
+.top {
+  background: rgba(16, 13, 11, 0.72);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+/* Кнопки: золотая пилюля и стеклянная пилюля */
+.btn {
+  min-height: 54px;
+  border-radius: 999px;
+  clip-path: none;
+  color: var(--on-gold);
+  background: linear-gradient(180deg, #f0d596, var(--gold-deep));
+  box-shadow: 0 0 0 1px rgba(255, 236, 190, 0.5) inset, 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+.btn:hover {
+  background: linear-gradient(180deg, #f6dfa8, #c79a4c);
+}
+
+.btn-ghost,
+.btn-ghost:hover {
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(227, 192, 120, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.btn-ghost:hover {
+  background: rgba(227, 192, 120, 0.16);
+}
+
+.phone {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.34),
+    0 0 0 6px rgba(255, 255, 255, 0.08),
+    0 34px 60px rgba(0, 0, 0, 0.6);
+}
+
+.inside,
+.steps {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.plan,
+.quote {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.plan-main {
+  background: linear-gradient(180deg, rgba(227, 192, 120, 0.24), rgba(227, 192, 120, 0.06));
+  border-color: rgba(227, 192, 120, 0.7);
+}
+
+.plan-tag {
+  color: var(--on-gold);
+  background: var(--accent);
+}
+
+.sites {
+  margin-top: 40px;
+  background: none;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.sites-bg {
+  background: none;
 }
