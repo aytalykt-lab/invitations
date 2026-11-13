@@ -142,6 +142,22 @@ a {
   border-bottom: 1px solid var(--accent);
 }
 
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 4vw, 28px);
+}
+
+@media (max-width: 420px) {
+  .top-nav { gap: 12px; }
+  .top-nav .top-link { font-size: 13px; letter-spacing: 0.12em; }
+}
+
+.foot-fine a {
+  color: var(--accent-deep);
+  text-underline-offset: 4px;
+}
+
 /* ---------- Общие ---------- */
 
 section {
