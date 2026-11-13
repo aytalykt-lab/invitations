@@ -98,3 +98,76 @@ if (fan && !reduceMotion) {
     { passive: true }
   );
 }
+
+/* Лендинги: веер карточек. Листается стрелками, миниатюрами, свайпом и клавишами */
+const deck = document.getElementById("deck");
+if (deck) {
+  const cards = [...deck.querySelectorAll(".card")];
+  const thumbs = [...document.querySelectorAll("#thumbs .thumb")];
+  const layers = [...document.querySelectorAll(".sites-bg i")];
+  let active = Math.min(2, cards.length - 1);
+  let layer = 0;
+
+  const show = (next) => {
+    active = Math.max(0, Math.min(cards.length - 1, next));
+    cards.forEach((card, i) => {
+      const d = i - active;
+      card.style.setProperty("--d", d);
+      card.style.setProperty("--s", Math.sign(d));
+      card.style.setProperty("--a", Math.min(Math.abs(d), 3));
+      card.style.zIndex = String(20 - Math.abs(d));
+      card.classList.toggle("is-active", d === 0);
+      card.classList.toggle("is-far", Math.abs(d) > 2);
+      card.setAttribute("aria-hidden", d === 0 ? "false" : "true");
+      const open = card.querySelector(".card-open");
+      if (open) open.tabIndex = d === 0 ? 0 : -1;
+    });
+    thumbs.forEach((t, i) => {
+      t.classList.toggle("is-active", i === active);
+      t.setAttribute("aria-pressed", i === active ? "true" : "false");
+    });
+    const t = thumbs[active];
+    if (t && t.parentElement) {
+      const row = t.parentElement;
+      row.scrollLeft = t.offsetLeft - row.offsetLeft - (row.clientWidth - t.offsetWidth) / 2;
+    }
+    if (layers.length === 2) {
+      layer = 1 - layer;
+      layers[layer].style.backgroundImage = `url("${cards[active].dataset.shot}")`;
+      layers[layer].classList.add("is-on");
+      layers[1 - layer].classList.remove("is-on");
+    }
+  };
+
+  cards.forEach((card, i) => {
+    card.addEventListener("click", (e) => {
+      if (i !== active) {
+        e.preventDefault();
+        show(i);
+      }
+    });
+  });
+  thumbs.forEach((t, i) => t.addEventListener("click", () => show(i)));
+  document.getElementById("deck-prev")?.addEventListener("click", () => show(active - 1));
+  document.getElementById("deck-next")?.addEventListener("click", () => show(active + 1));
+  deck.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") show(active - 1);
+    if (e.key === "ArrowRight") show(active + 1);
+  });
+
+  let startX = null;
+  deck.addEventListener("pointerdown", (e) => {
+    startX = e.clientX;
+  });
+  deck.addEventListener("pointerup", (e) => {
+    if (startX === null) return;
+    const dx = e.clientX - startX;
+    startX = null;
+    if (Math.abs(dx) > 40) show(active + (dx < 0 ? 1 : -1));
+  });
+  deck.addEventListener("pointercancel", () => {
+    startX = null;
+  });
+
+  show(active);
+}
