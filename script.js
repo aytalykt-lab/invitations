@@ -104,9 +104,8 @@ const deck = document.getElementById("deck");
 if (deck) {
   const cards = [...deck.querySelectorAll(".card")];
   const thumbs = [...document.querySelectorAll("#thumbs .thumb")];
-  const layers = [...document.querySelectorAll(".sites-bg i")];
+  const stageEl = deck.closest(".sites");
   let active = Math.min(2, cards.length - 1);
-  let layer = 0;
 
   const show = (next) => {
     active = Math.max(0, Math.min(cards.length - 1, next));
@@ -131,11 +130,9 @@ if (deck) {
       const row = t.parentElement;
       row.scrollLeft = t.offsetLeft - row.offsetLeft - (row.clientWidth - t.offsetWidth) / 2;
     }
-    if (layers.length === 2) {
-      layer = 1 - layer;
-      layers[layer].style.backgroundImage = `url("${cards[active].dataset.shot}")`;
-      layers[layer].classList.add("is-on");
-      layers[1 - layer].classList.remove("is-on");
+    if (stageEl) {
+      stageEl.style.setProperty("--t1", cards[active].dataset.t1 || "");
+      stageEl.style.setProperty("--t2", cards[active].dataset.t2 || "");
     }
   };
 
